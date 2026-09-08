@@ -2,93 +2,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>NEXUS PRIME — Future Store</title>
+<title>NEXUS PRIME — Premium Tech Store</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
 
 <style>
 
 /* =========================================================
-   RESET
+   GLOBAL
 ========================================================= */
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-:root {
-    --bg: #08090d;
-    --surface: #10121a;
-    --surface-2: #161923;
-    --surface-3: #1c202c;
+:root{
 
-    --text: #f8fafc;
-    --muted: #9298a8;
+    --bg:#05060a;
+    --bg2:#090b12;
 
-    --primary: #8b5cf6;
-    --primary-dark: #6d28d9;
+    --card:rgba(255,255,255,.045);
+    --card-hover:rgba(255,255,255,.075);
 
-    --cyan: #22d3ee;
-    --green: #22c55e;
-    --yellow: #fbbf24;
-    --red: #ef4444;
+    --text:#ffffff;
+    --muted:#8d94a6;
 
-    --border: rgba(255,255,255,.09);
+    --purple:#8b5cf6;
+    --purple2:#a78bfa;
 
-    --radius: 20px;
-    --shadow: 0 25px 70px rgba(0,0,0,.35);
+    --cyan:#22d3ee;
+
+    --green:#22c55e;
+
+    --yellow:#facc15;
+
+    --border:rgba(255,255,255,.09);
+
+    --radius:24px;
+
+    --shadow:
+        0 30px 100px rgba(0,0,0,.45);
 }
 
-html {
-    scroll-behavior: smooth;
+html{
+    scroll-behavior:smooth;
 }
 
-body {
-    font-family: "Inter", sans-serif;
+body{
+
+    font-family:"Inter",sans-serif;
+
     background:
         radial-gradient(
-            circle at 10% 0%,
-            rgba(139,92,246,.14),
-            transparent 28%
+            circle at 10% 10%,
+            rgba(139,92,246,.13),
+            transparent 25%
         ),
+
         radial-gradient(
-            circle at 90% 15%,
+            circle at 90% 20%,
             rgba(34,211,238,.10),
-            transparent 28%
+            transparent 25%
         ),
+
+        radial-gradient(
+            circle at 50% 100%,
+            rgba(139,92,246,.08),
+            transparent 30%
+        ),
+
         var(--bg);
 
-    color: var(--text);
-    min-height: 100vh;
+    color:var(--text);
+
+    min-height:100vh;
+
+    overflow-x:hidden;
 }
 
 button,
 input,
-select {
-    font: inherit;
+select{
+    font:inherit;
 }
 
-button {
-    cursor: pointer;
+button{
+    cursor:pointer;
 }
 
-img {
-    display: block;
-    max-width: 100%;
+img{
+    max-width:100%;
+    display:block;
 }
 
-button:focus-visible,
-input:focus-visible,
-select:focus-visible {
-    outline: 2px solid var(--cyan);
-    outline-offset: 3px;
+
+/* =========================================================
+   AMBIENT BACKGROUND
+========================================================= */
+
+.ambient{
+
+    position:fixed;
+
+    width:500px;
+    height:500px;
+
+    border-radius:50%;
+
+    filter:blur(130px);
+
+    opacity:.12;
+
+    pointer-events:none;
+
+    z-index:-1;
+
+    animation:ambientMove 12s ease-in-out infinite;
+}
+
+.ambient.one{
+
+    background:var(--purple);
+
+    left:-250px;
+    top:200px;
+}
+
+.ambient.two{
+
+    background:var(--cyan);
+
+    right:-250px;
+    top:500px;
+
+    animation-delay:3s;
+}
+
+@keyframes ambientMove{
+
+    0%,100%{
+        transform:translate(0,0);
+    }
+
+    50%{
+        transform:translate(60px,-40px);
+    }
 }
 
 
@@ -96,37 +164,82 @@ select:focus-visible {
    HEADER
 ========================================================= */
 
-header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
+header{
 
-    background: rgba(8,9,13,.82);
-    backdrop-filter: blur(22px);
+    position:sticky;
 
-    border-bottom: 1px solid var(--border);
+    top:0;
+
+    z-index:100;
+
+    background:rgba(5,6,10,.72);
+
+    backdrop-filter:blur(25px);
+
+    border-bottom:1px solid var(--border);
 }
 
-.nav {
-    max-width: 1250px;
-    margin: auto;
+.nav{
 
-    padding: 16px 24px;
+    max-width:1300px;
 
-    display: flex;
-    align-items: center;
-    gap: 25px;
+    margin:auto;
+
+    padding:15px 25px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:25px;
 }
 
-.logo {
-    font-size: 21px;
-    font-weight: 800;
-    letter-spacing: 2px;
-    white-space: nowrap;
+
+/* LOGO */
+
+.logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+
+    font-size:19px;
+
+    font-weight:800;
+
+    letter-spacing:2px;
+
+    white-space:nowrap;
 }
 
-.logo span {
-    color: var(--cyan);
+.logo-mark{
+
+    width:30px;
+    height:30px;
+
+    border-radius:10px;
+
+    display:grid;
+
+    place-items:center;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--purple),
+            var(--cyan)
+        );
+
+    box-shadow:
+        0 0 25px rgba(139,92,246,.35);
+
+    font-size:14px;
+}
+
+.logo span{
+    color:var(--cyan);
 }
 
 
@@ -134,103 +247,142 @@ header {
    SEARCH
 ========================================================= */
 
-.search {
-    flex: 1;
-    position: relative;
+.search{
+
+    flex:1;
+
+    max-width:600px;
+
+    margin:auto;
+
+    position:relative;
 }
 
-.search input {
-    width: 100%;
+.search input{
 
-    padding: 13px 18px 13px 44px;
+    width:100%;
 
-    border: 1px solid var(--border);
-    border-radius: 14px;
+    height:46px;
 
-    background: rgba(255,255,255,.045);
+    padding:0 20px 0 45px;
 
-    color: white;
-    outline: none;
+    border-radius:15px;
 
-    transition: .3s;
+    border:1px solid var(--border);
+
+    background:rgba(255,255,255,.045);
+
+    color:white;
+
+    outline:none;
+
+    transition:.3s;
 }
 
-.search input::placeholder {
-    color: #777d8d;
+.search input::placeholder{
+    color:#6f7688;
 }
 
-.search input:focus {
-    border-color: var(--primary);
+.search input:focus{
+
+    border-color:
+        rgba(139,92,246,.6);
+
+    background:
+        rgba(255,255,255,.07);
 
     box-shadow:
-        0 0 0 3px rgba(139,92,246,.12),
-        0 0 30px rgba(139,92,246,.12);
+        0 0 0 4px
+        rgba(139,92,246,.08);
 }
 
-.search-icon {
-    position: absolute;
+.search-icon{
 
-    left: 15px;
-    top: 50%;
+    position:absolute;
 
-    transform: translateY(-50%);
+    left:16px;
 
-    color: var(--muted);
-    font-size: 18px;
+    top:50%;
+
+    transform:translateY(-50%);
+
+    color:#858b9c;
+
+    font-size:17px;
 }
 
 
 /* =========================================================
-   NAV ACTIONS
+   NAV BUTTONS
 ========================================================= */
 
-.nav-actions {
-    display: flex;
-    gap: 9px;
+.nav-actions{
+
+    display:flex;
+
+    gap:9px;
 }
 
-.icon-btn {
-    width: 44px;
-    height: 44px;
+.icon-btn{
 
-    position: relative;
+    width:44px;
+    height:44px;
 
-    border: 1px solid var(--border);
-    border-radius: 13px;
+    border:1px solid var(--border);
 
-    background: rgba(255,255,255,.045);
+    border-radius:14px;
 
-    color: white;
+    background:rgba(255,255,255,.045);
 
-    transition: .3s;
+    color:white;
+
+    position:relative;
+
+    transition:.3s;
 }
 
-.icon-btn:hover {
-    background: rgba(255,255,255,.1);
-    transform: translateY(-2px);
+.icon-btn:hover{
+
+    transform:translateY(-3px);
+
+    background:
+        rgba(255,255,255,.09);
+
+    border-color:
+        rgba(255,255,255,.15);
 }
 
-.badge {
-    position: absolute;
+.badge{
 
-    right: -5px;
-    top: -5px;
+    position:absolute;
 
-    min-width: 19px;
-    height: 19px;
+    top:-5px;
+    right:-5px;
 
-    padding: 0 5px;
+    min-width:19px;
+    height:19px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    padding:0 5px;
 
-    border-radius: 20px;
+    display:grid;
+    place-items:center;
 
-    background: var(--primary);
+    border-radius:20px;
 
-    font-size: 10px;
-    font-weight: 700;
+    background:
+        linear-gradient(
+            135deg,
+            var(--purple),
+            #6d28d9
+        );
+
+    font-size:10px;
+
+    font-weight:700;
+
+    box-shadow:
+        0 5px 15px
+        rgba(139,92,246,.4);
 }
 
 
@@ -238,310 +390,414 @@ header {
    HERO
 ========================================================= */
 
-.hero {
-    max-width: 1250px;
-    margin: 38px auto;
-    padding: 0 24px;
+.hero{
+
+    max-width:1300px;
+
+    margin:35px auto 30px;
+
+    padding:0 25px;
 }
 
-.hero-box {
-    min-height: 470px;
+.hero-box{
 
-    position: relative;
+    min-height:590px;
 
-    display: flex;
-    align-items: center;
+    position:relative;
 
-    padding: 65px;
+    overflow:hidden;
 
-    overflow: hidden;
+    border:1px solid var(--border);
 
-    border: 1px solid var(--border);
-    border-radius: 30px;
+    border-radius:34px;
+
+    display:flex;
+
+    align-items:center;
+
+    padding:70px;
 
     background:
+
         linear-gradient(
             120deg,
-            #10121a,
-            #18142b 52%,
-            #0d2028
+            rgba(18,20,30,.95),
+            rgba(20,16,38,.9),
+            rgba(8,27,34,.92)
         );
 
-    box-shadow: var(--shadow);
+    box-shadow:var(--shadow);
 }
 
-.hero-box::before {
-    content: "";
 
-    position: absolute;
+/* HERO GRID */
 
-    width: 430px;
-    height: 430px;
+.hero-grid{
 
-    right: -100px;
-    top: -130px;
+    position:absolute;
 
-    border-radius: 50%;
+    inset:0;
 
-    background: var(--primary);
+    opacity:.18;
 
-    filter: blur(120px);
-    opacity: .2;
+    background-image:
+
+        linear-gradient(
+            rgba(255,255,255,.06) 1px,
+            transparent 1px
+        ),
+
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.06) 1px,
+            transparent 1px
+        );
+
+    background-size:45px 45px;
+
+    mask-image:
+        linear-gradient(
+            to bottom,
+            black,
+            transparent
+        );
 }
 
-.hero-box::after {
-    content: "";
 
-    position: absolute;
+/* HERO GLOW */
 
-    width: 330px;
-    height: 330px;
+.hero-glow{
 
-    left: 20%;
-    bottom: -190px;
+    position:absolute;
 
-    border-radius: 50%;
+    width:600px;
+    height:600px;
 
-    background: var(--cyan);
+    right:-150px;
+    top:-150px;
 
-    filter: blur(120px);
-    opacity: .12;
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(139,92,246,.35),
+            transparent 65%
+        );
+
+    filter:blur(20px);
 }
 
-.hero-content {
-    position: relative;
-    z-index: 2;
 
-    max-width: 650px;
+/* HERO CONTENT */
+
+.hero-content{
+
+    position:relative;
+
+    z-index:5;
+
+    max-width:650px;
 }
 
-.eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 9px;
+.eyebrow{
 
-    padding: 8px 13px;
+    display:inline-flex;
 
-    margin-bottom: 22px;
+    align-items:center;
 
-    border: 1px solid var(--border);
-    border-radius: 50px;
+    gap:9px;
 
-    background: rgba(255,255,255,.05);
+    padding:9px 14px;
 
-    color: #c9cdd7;
+    border-radius:50px;
 
-    font-size: 12px;
-    font-weight: 600;
+    border:1px solid
+        rgba(255,255,255,.1);
+
+    background:
+        rgba(255,255,255,.05);
+
+    color:#c8cdd8;
+
+    font-size:11px;
+
+    font-weight:600;
+
+    letter-spacing:.5px;
+
+    margin-bottom:25px;
 }
 
-.dot {
-    width: 7px;
-    height: 7px;
+.live-dot{
 
-    border-radius: 50%;
+    width:7px;
+    height:7px;
 
-    background: var(--green);
+    border-radius:50%;
 
-    box-shadow: 0 0 12px var(--green);
+    background:var(--green);
+
+    box-shadow:
+        0 0 15px var(--green);
 }
 
-.hero h1 {
-    font-size: clamp(43px, 6vw, 76px);
+.hero h1{
 
-    line-height: .98;
+    font-size:
+        clamp(48px,7vw,86px);
 
-    letter-spacing: -4px;
+    line-height:.96;
 
-    margin-bottom: 23px;
+    letter-spacing:-5px;
+
+    margin-bottom:25px;
 }
 
-.gradient-text {
+.gradient{
+
     background:
         linear-gradient(
             90deg,
-            #fff,
-            var(--cyan),
-            var(--primary)
+            white,
+            #67e8f9,
+            #a78bfa
         );
 
-    -webkit-background-clip: text;
-    background-clip: text;
+    -webkit-background-clip:text;
 
-    color: transparent;
+    background-clip:text;
+
+    color:transparent;
 }
 
-.hero p {
-    max-width: 560px;
+.hero p{
 
-    color: var(--muted);
+    max-width:570px;
 
-    line-height: 1.75;
+    color:var(--muted);
 
-    margin-bottom: 30px;
+    font-size:15px;
+
+    line-height:1.8;
+
+    margin-bottom:32px;
 }
 
 
-/* =========================================================
-   BUTTONS
-========================================================= */
+/* HERO BUTTONS */
 
-.hero-buttons {
-    display: flex;
-    gap: 12px;
+.hero-buttons{
+
+    display:flex;
+
+    gap:12px;
+
+    align-items:center;
 }
 
-.btn {
-    padding: 14px 21px;
+.btn{
 
-    border: 1px solid var(--border);
-    border-radius: 13px;
+    padding:14px 21px;
 
-    background: rgba(255,255,255,.055);
+    border-radius:14px;
 
-    color: white;
+    border:1px solid var(--border);
 
-    transition: .3s;
+    background:
+        rgba(255,255,255,.055);
+
+    color:white;
+
+    transition:.3s;
 }
 
-.btn:hover {
-    transform: translateY(-3px);
-    background: rgba(255,255,255,.1);
+.btn:hover{
+
+    transform:translateY(-3px);
+
+    background:
+        rgba(255,255,255,.1);
 }
 
-.btn-primary {
-    border: none;
+.btn-primary{
+
+    border:none;
 
     background:
         linear-gradient(
             135deg,
-            var(--primary),
-            var(--primary-dark)
+            var(--purple),
+            #6d28d9
         );
 
     box-shadow:
-        0 12px 30px rgba(139,92,246,.25);
+        0 15px 35px
+        rgba(139,92,246,.28);
 }
 
-.btn-primary:hover {
+.btn-primary:hover{
+
     box-shadow:
-        0 17px 38px rgba(139,92,246,.35);
+        0 20px 45px
+        rgba(139,92,246,.4);
 }
 
 
 /* =========================================================
-   HERO PRODUCT
+   FLOATING DEVICE
 ========================================================= */
 
-.hero-product {
-    position: absolute;
+.device{
 
-    right: 8%;
-    bottom: 45px;
+    position:absolute;
 
-    width: 270px;
-    height: 340px;
+    right:8%;
 
-    padding: 10px;
+    bottom:55px;
 
-    border: 1px solid rgba(255,255,255,.13);
-    border-radius: 30px;
+    width:310px;
+    height:410px;
+
+    z-index:4;
+
+    padding:9px;
+
+    border-radius:32px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,.14),
+            rgba(255,255,255,.2),
             rgba(255,255,255,.03)
         );
 
-    backdrop-filter: blur(20px);
+    border:1px solid
+        rgba(255,255,255,.15);
 
-    transform: rotate(6deg);
+    backdrop-filter:blur(20px);
+
+    transform:
+        rotate(7deg);
 
     box-shadow:
-        0 40px 90px rgba(0,0,0,.45);
+        0 50px 100px
+        rgba(0,0,0,.55);
 
-    animation: float 5s ease-in-out infinite;
+    animation:
+        deviceFloat 5s ease-in-out infinite;
 }
 
-.hero-product img {
-    width: 100%;
-    height: 100%;
+.device img{
 
-    object-fit: cover;
+    width:100%;
+    height:100%;
 
-    border-radius: 22px;
+    object-fit:cover;
+
+    border-radius:25px;
 }
 
-@keyframes float {
+.device::after{
 
-    0%,
-    100% {
-        transform: rotate(6deg) translateY(0);
+    content:"";
+
+    position:absolute;
+
+    inset:10%;
+
+    border-radius:50%;
+
+    background:
+        rgba(139,92,246,.35);
+
+    filter:blur(80px);
+
+    z-index:-1;
+}
+
+@keyframes deviceFloat{
+
+    0%,100%{
+        transform:
+            rotate(7deg)
+            translateY(0);
     }
 
-    50% {
-        transform: rotate(4deg) translateY(-15px);
+    50%{
+        transform:
+            rotate(4deg)
+            translateY(-18px);
     }
 }
 
 
 /* =========================================================
-   TRUST
+   TRUST STRIP
 ========================================================= */
 
-.trust {
-    max-width: 1250px;
+.trust{
 
-    margin: 0 auto 45px;
+    max-width:1300px;
 
-    padding: 0 24px;
+    margin:0 auto 55px;
+
+    padding:0 25px;
 }
 
-.trust-grid {
-    display: grid;
+.trust-grid{
 
-    grid-template-columns: repeat(4, 1fr);
+    display:grid;
 
-    gap: 14px;
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:14px;
 }
 
-.trust-item {
-    padding: 20px;
+.trust-card{
 
-    border: 1px solid var(--border);
-    border-radius: 18px;
+    padding:20px;
 
-    background: rgba(255,255,255,.025);
+    border:1px solid var(--border);
 
-    transition: .3s;
+    border-radius:20px;
+
+    background:
+        rgba(255,255,255,.025);
+
+    transition:.3s;
 }
 
-.trust-item:hover {
-    transform: translateY(-3px);
+.trust-card:hover{
 
-    background: rgba(255,255,255,.045);
+    transform:translateY(-4px);
+
+    background:
+        rgba(255,255,255,.05);
 }
 
-.trust-icon {
-    font-size: 22px;
-    margin-bottom: 12px;
+.trust-icon{
+
+    font-size:21px;
+
+    margin-bottom:12px;
 }
 
-.trust-item strong {
-    display: block;
+.trust-card strong{
 
-    margin-bottom: 5px;
+    display:block;
 
-    font-size: 14px;
+    font-size:13px;
+
+    margin-bottom:5px;
 }
 
-.trust-item span {
-    color: var(--muted);
+.trust-card span{
 
-    font-size: 12px;
+    color:var(--muted);
 
-    line-height: 1.5;
+    font-size:11px;
 }
 
 
@@ -549,101 +805,137 @@ header {
    STORE
 ========================================================= */
 
-.store {
-    max-width: 1250px;
+.store{
 
-    margin: auto;
+    max-width:1300px;
 
-    padding: 0 24px 70px;
+    margin:auto;
+
+    padding:0 25px 90px;
 }
 
-.section-head {
-    display: flex;
+.store-header{
 
-    align-items: flex-end;
-    justify-content: space-between;
+    display:flex;
 
-    gap: 20px;
+    justify-content:space-between;
 
-    margin-bottom: 24px;
+    align-items:flex-end;
+
+    gap:20px;
+
+    margin-bottom:25px;
 }
 
-.section-head h2 {
-    font-size: 30px;
+.store-title h2{
+
+    font-size:34px;
+
+    letter-spacing:-1.5px;
 }
 
-.section-head p {
-    color: var(--muted);
+.store-title p{
 
-    font-size: 14px;
+    color:var(--muted);
 
-    margin-top: 6px;
+    margin-top:6px;
+
+    font-size:13px;
 }
 
-.product-count {
-    color: var(--muted);
+.product-count{
 
-    font-size: 12px;
+    color:#6f7688;
 
-    margin-top: 10px;
+    font-size:11px;
+
+    margin-top:9px;
 }
 
 
 /* =========================================================
-   FILTERS
+   CATEGORY BAR
 ========================================================= */
 
-.store-controls {
-    display: flex;
-    align-items: center;
+.category-bar{
 
-    gap: 10px;
+    display:flex;
 
-    margin-bottom: 25px;
+    gap:9px;
 
-    overflow-x: auto;
+    overflow-x:auto;
 
-    padding-bottom: 3px;
+    padding-bottom:15px;
+
+    scrollbar-width:none;
 }
 
-.filter-btn {
-    white-space: nowrap;
-
-    padding: 9px 14px;
-
-    border: 1px solid var(--border);
-    border-radius: 50px;
-
-    background: rgba(255,255,255,.035);
-
-    color: #aeb4c2;
-
-    font-size: 12px;
-
-    transition: .25s;
+.category-bar::-webkit-scrollbar{
+    display:none;
 }
 
-.filter-btn:hover,
-.filter-btn.active {
-    color: white;
+.category{
 
-    border-color: var(--primary);
+    white-space:nowrap;
+
+    padding:10px 16px;
+
+    border-radius:50px;
+
+    border:1px solid var(--border);
+
+    background:
+        rgba(255,255,255,.035);
+
+    color:#969dad;
+
+    font-size:11px;
+
+    transition:.25s;
+}
+
+.category:hover{
+
+    color:white;
+
+    background:
+        rgba(255,255,255,.07);
+}
+
+.category.active{
+
+    color:white;
+
+    border-color:
+        rgba(139,92,246,.6);
 
     background:
         rgba(139,92,246,.15);
+
+    box-shadow:
+        0 5px 20px
+        rgba(139,92,246,.12);
 }
 
-.sort {
-    padding: 11px 14px;
 
-    border: 1px solid var(--border);
-    border-radius: 12px;
+/* =========================================================
+   SORT
+========================================================= */
 
-    background: var(--surface);
+.sort{
 
-    color: white;
+    padding:11px 15px;
 
-    outline: none;
+    border:1px solid var(--border);
+
+    border-radius:13px;
+
+    background:
+        rgba(255,255,255,.04);
+
+    color:white;
+
+    outline:none;
 }
 
 
@@ -651,212 +943,306 @@ header {
    PRODUCTS
 ========================================================= */
 
-.products {
-    display: grid;
+.products{
 
-    grid-template-columns: repeat(3, 1fr);
+    display:grid;
 
-    gap: 20px;
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:20px;
 }
 
-.product {
-    position: relative;
 
-    overflow: hidden;
+/* PRODUCT CARD */
 
-    padding: 12px;
+.product{
 
-    border: 1px solid var(--border);
-    border-radius: 24px;
+    position:relative;
+
+    overflow:hidden;
+
+    padding:11px;
+
+    border:1px solid var(--border);
+
+    border-radius:25px;
 
     background:
         linear-gradient(
             145deg,
-            #11131a,
-            #0d0f15
+            rgba(255,255,255,.055),
+            rgba(255,255,255,.02)
         );
 
-    transition: .35s;
+    transition:
+        transform .4s,
+        border .4s,
+        box-shadow .4s;
 }
 
-.product:hover {
-    transform: translateY(-7px);
+.product:hover{
+
+    transform:
+        translateY(-8px);
 
     border-color:
         rgba(139,92,246,.4);
 
     box-shadow:
-        0 25px 60px rgba(0,0,0,.3);
+        0 25px 70px
+        rgba(0,0,0,.35);
 }
 
-.product-image {
-    height: 280px;
 
-    position: relative;
+/* PRODUCT IMAGE */
 
-    overflow: hidden;
+.product-image{
 
-    border-radius: 18px;
+    height:290px;
 
-    background: #191c25;
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:19px;
+
+    background:#11131a;
 }
 
-.product-image img {
-    width: 100%;
-    height: 100%;
+.product-image img{
 
-    object-fit: cover;
+    width:100%;
+    height:100%;
 
-    transition: .5s;
+    object-fit:cover;
+
+    transition:
+        transform .7s,
+        filter .5s;
 }
 
-.product:hover .product-image img {
-    transform: scale(1.06);
+.product:hover
+.product-image img{
+
+    transform:scale(1.08);
+
+    filter:saturate(1.1);
 }
 
-.tag {
-    position: absolute;
 
-    left: 12px;
-    top: 12px;
+/* IMAGE OVERLAY */
 
-    padding: 7px 10px;
+.product-image::after{
 
-    border-radius: 9px;
+    content:"";
 
-    background: rgba(0,0,0,.65);
+    position:absolute;
 
-    backdrop-filter: blur(10px);
+    inset:0;
 
-    font-size: 10px;
-    font-weight: 700;
+    background:
+        linear-gradient(
+            to top,
+            rgba(0,0,0,.35),
+            transparent 45%
+        );
+
+    pointer-events:none;
 }
 
-.heart {
-    position: absolute;
 
-    right: 12px;
-    top: 12px;
+/* TAG */
 
-    width: 38px;
-    height: 38px;
+.tag{
 
-    border: 1px solid rgba(255,255,255,.13);
-    border-radius: 12px;
+    position:absolute;
 
-    background: rgba(0,0,0,.5);
+    top:12px;
+    left:12px;
 
-    color: white;
+    z-index:3;
 
-    font-size: 18px;
+    padding:7px 10px;
 
-    transition: .25s;
+    border-radius:9px;
+
+    background:
+        rgba(0,0,0,.65);
+
+    backdrop-filter:blur(12px);
+
+    font-size:9px;
+
+    font-weight:700;
+
+    letter-spacing:.5px;
 }
 
-.heart:hover {
-    background: rgba(239,68,68,.18);
 
-    transform: scale(1.08);
+/* HEART */
+
+.heart{
+
+    position:absolute;
+
+    top:12px;
+    right:12px;
+
+    z-index:4;
+
+    width:38px;
+    height:38px;
+
+    border-radius:12px;
+
+    border:1px solid
+        rgba(255,255,255,.12);
+
+    background:
+        rgba(0,0,0,.5);
+
+    color:white;
+
+    font-size:18px;
+
+    transition:.25s;
 }
 
-.heart.liked {
-    color: #fb7185;
+.heart:hover{
+
+    transform:scale(1.1);
+
+    background:
+        rgba(255,255,255,.12);
 }
 
-.product-info {
-    padding: 18px 6px 7px;
+.heart.liked{
+
+    color:#fb7185;
+
+    border-color:
+        rgba(251,113,133,.3);
 }
 
-.category {
-    color: var(--cyan);
 
-    font-size: 10px;
+/* PRODUCT INFO */
 
-    text-transform: uppercase;
+.product-info{
 
-    letter-spacing: 1.2px;
-
-    font-weight: 700;
+    padding:18px 6px 7px;
 }
 
-.product h3 {
-    margin: 8px 0;
+.category-label{
 
-    font-size: 17px;
+    color:var(--cyan);
+
+    font-size:9px;
+
+    text-transform:uppercase;
+
+    letter-spacing:1.3px;
+
+    font-weight:700;
 }
 
-.rating {
-    color: var(--yellow);
+.product h3{
 
-    font-size: 12px;
+    font-size:17px;
 
-    margin-bottom: 13px;
+    margin:8px 0;
+
+    letter-spacing:-.3px;
 }
 
-.price-row {
-    display: flex;
+.rating{
 
-    align-items: center;
-    justify-content: space-between;
+    color:var(--yellow);
+
+    font-size:11px;
+
+    margin-bottom:15px;
 }
 
-.price {
-    font-size: 20px;
+.product-bottom{
 
-    font-weight: 800;
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
 }
 
-.add {
-    width: 42px;
-    height: 42px;
+.price{
 
-    border: none;
-    border-radius: 12px;
+    font-size:21px;
 
-    background: white;
-
-    color: #08090d;
-
-    font-size: 22px;
-
-    transition: .3s;
+    font-weight:800;
 }
 
-.add:hover {
-    background: var(--cyan);
+.add{
 
-    transform: rotate(5deg) scale(1.05);
+    width:44px;
+    height:44px;
+
+    border:none;
+
+    border-radius:13px;
+
+    background:white;
+
+    color:#05060a;
+
+    font-size:22px;
+
+    transition:.3s;
+}
+
+.add:hover{
+
+    transform:
+        rotate(5deg)
+        scale(1.08);
+
+    background:var(--cyan);
+
+    box-shadow:
+        0 10px 25px
+        rgba(34,211,238,.25);
 }
 
 
 /* =========================================================
-   EMPTY SEARCH
+   EMPTY RESULTS
 ========================================================= */
 
-.empty-results {
-    grid-column: 1 / -1;
+.empty-results{
 
-    padding: 70px 20px;
+    grid-column:1/-1;
 
-    text-align: center;
+    padding:80px 20px;
 
-    border: 1px dashed var(--border);
+    text-align:center;
 
-    border-radius: 20px;
+    border:1px dashed var(--border);
 
-    color: var(--muted);
+    border-radius:25px;
+
+    color:var(--muted);
 }
 
-.empty-results-icon {
-    font-size: 42px;
+.empty-results-icon{
 
-    margin-bottom: 15px;
+    font-size:42px;
+
+    margin-bottom:15px;
 }
 
-.empty-results h3 {
-    color: white;
+.empty-results h3{
 
-    margin-bottom: 7px;
+    color:white;
+
+    margin-bottom:8px;
 }
 
 
@@ -864,281 +1250,330 @@ header {
    CART OVERLAY
 ========================================================= */
 
-.cart-overlay {
-    position: fixed;
+.cart-overlay{
 
-    inset: 0;
+    position:fixed;
 
-    z-index: 200;
+    inset:0;
 
-    background: rgba(0,0,0,.65);
+    z-index:500;
 
-    backdrop-filter: blur(6px);
+    background:
+        rgba(0,0,0,.7);
 
-    opacity: 0;
-    visibility: hidden;
+    backdrop-filter:blur(8px);
 
-    transition: .3s;
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:.3s;
 }
 
-.cart-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
+.cart-overlay.active{
 
-.cart {
-    position: absolute;
+    opacity:1;
 
-    right: 0;
-    top: 0;
-
-    width: min(450px, 100%);
-
-    height: 100%;
-
-    display: flex;
-    flex-direction: column;
-
-    padding: 25px;
-
-    background: #0e1016;
-
-    border-left: 1px solid var(--border);
-
-    transform: translateX(100%);
-
-    transition: .4s;
-}
-
-.cart-overlay.active .cart {
-    transform: translateX(0);
-}
-
-.cart-head {
-    display: flex;
-
-    align-items: center;
-    justify-content: space-between;
-
-    padding-bottom: 20px;
-
-    border-bottom: 1px solid var(--border);
-}
-
-.cart-head h2 {
-    font-size: 22px;
-}
-
-.cart-subtitle {
-    color: var(--muted);
-
-    font-size: 12px;
-
-    margin-top: 4px;
-}
-
-.close {
-    width: 38px;
-    height: 38px;
-
-    border: 1px solid var(--border);
-    border-radius: 10px;
-
-    background: rgba(255,255,255,.04);
-
-    color: white;
-
-    transition: .2s;
-}
-
-.close:hover {
-    background: rgba(255,255,255,.1);
+    visibility:visible;
 }
 
 
-/* =========================================================
-   CART ITEMS
-========================================================= */
+/* CART */
 
-.cart-items {
-    flex: 1;
+.cart{
 
-    overflow-y: auto;
+    position:absolute;
 
-    padding: 20px 0;
+    right:0;
+    top:0;
+
+    width:min(460px,100%);
+
+    height:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    padding:25px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #0c0e15,
+            #07080d
+        );
+
+    border-left:
+        1px solid var(--border);
+
+    transform:translateX(100%);
+
+    transition:.45s;
 }
 
-.cart-item {
-    display: flex;
+.cart-overlay.active .cart{
 
-    gap: 12px;
-
-    padding: 14px 0;
-
-    border-bottom: 1px solid var(--border);
-}
-
-.cart-item img {
-    width: 72px;
-    height: 72px;
-
-    flex-shrink: 0;
-
-    border-radius: 13px;
-
-    object-fit: cover;
-}
-
-.cart-item-info {
-    flex: 1;
-}
-
-.cart-item h4 {
-    font-size: 14px;
-
-    margin-bottom: 6px;
-}
-
-.cart-item-price {
-    color: var(--cyan);
-
-    font-size: 13px;
-
-    margin-bottom: 10px;
+    transform:translateX(0);
 }
 
 
-/* =========================================================
-   QUANTITY
-========================================================= */
+/* CART HEADER */
 
-.quantity {
-    display: inline-flex;
+.cart-header{
 
-    align-items: center;
+    display:flex;
 
-    border: 1px solid var(--border);
+    align-items:center;
 
-    border-radius: 9px;
+    justify-content:space-between;
 
-    overflow: hidden;
+    padding-bottom:20px;
+
+    border-bottom:
+        1px solid var(--border);
 }
 
-.quantity button {
-    width: 28px;
-    height: 28px;
+.cart-header h2{
 
-    border: none;
-
-    background: rgba(255,255,255,.04);
-
-    color: white;
+    font-size:22px;
 }
 
-.quantity button:hover {
-    background: rgba(255,255,255,.1);
+.cart-header p{
+
+    color:var(--muted);
+
+    font-size:11px;
+
+    margin-top:4px;
 }
 
-.quantity span {
-    min-width: 28px;
+.close{
 
-    text-align: center;
+    width:38px;
+    height:38px;
 
-    font-size: 12px;
+    border:1px solid var(--border);
+
+    border-radius:11px;
+
+    background:
+        rgba(255,255,255,.04);
+
+    color:white;
+
+    transition:.2s;
+}
+
+.close:hover{
+
+    background:
+        rgba(255,255,255,.1);
 }
 
 
-/* =========================================================
-   CART FOOTER
-========================================================= */
+/* CART ITEMS */
 
-.cart-footer {
-    padding-top: 20px;
+.cart-items{
 
-    border-top: 1px solid var(--border);
+    flex:1;
+
+    overflow-y:auto;
+
+    padding:15px 0;
 }
 
-.subtotal-row,
-.shipping-row,
-.total {
-    display: flex;
+.cart-item{
 
-    justify-content: space-between;
+    display:flex;
 
-    margin-bottom: 10px;
+    gap:12px;
 
-    font-size: 14px;
+    padding:15px 0;
+
+    border-bottom:
+        1px solid var(--border);
 }
 
-.shipping-row {
-    color: var(--muted);
+.cart-item img{
+
+    width:72px;
+    height:72px;
+
+    border-radius:13px;
+
+    object-fit:cover;
 }
 
-.total {
-    margin-top: 15px;
+.cart-info{
 
-    padding-top: 15px;
-
-    border-top: 1px solid var(--border);
-
-    font-size: 20px;
-
-    font-weight: 800;
+    flex:1;
 }
 
-.checkout {
-    width: 100%;
+.cart-info h4{
 
-    padding: 15px;
+    font-size:13px;
 
-    border: none;
+    margin-bottom:6px;
+}
 
-    border-radius: 14px;
+.cart-price{
+
+    color:var(--cyan);
+
+    font-size:12px;
+
+    margin-bottom:10px;
+}
+
+
+/* QUANTITY */
+
+.quantity{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    border:1px solid var(--border);
+
+    border-radius:9px;
+
+    overflow:hidden;
+}
+
+.quantity button{
+
+    width:28px;
+    height:27px;
+
+    border:none;
+
+    background:
+        rgba(255,255,255,.04);
+
+    color:white;
+}
+
+.quantity button:hover{
+
+    background:
+        rgba(255,255,255,.1);
+}
+
+.quantity span{
+
+    min-width:28px;
+
+    text-align:center;
+
+    font-size:11px;
+}
+
+
+/* CART FOOTER */
+
+.cart-footer{
+
+    padding-top:20px;
+
+    border-top:
+        1px solid var(--border);
+}
+
+.summary-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-bottom:9px;
+
+    font-size:13px;
+}
+
+.summary-row.muted{
+
+    color:var(--muted);
+}
+
+.total{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    padding-top:15px;
+
+    margin-top:13px;
+
+    border-top:
+        1px solid var(--border);
+
+    font-size:20px;
+
+    font-weight:800;
+
+    margin-bottom:17px;
+}
+
+.checkout{
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:14px;
 
     background:
         linear-gradient(
             135deg,
-            var(--primary),
-            var(--primary-dark)
+            var(--purple),
+            #6d28d9
         );
 
-    color: white;
+    color:white;
 
-    font-weight: 700;
+    font-weight:700;
 
-    transition: .3s;
+    transition:.3s;
 }
 
-.checkout:hover {
-    transform: translateY(-2px);
+.checkout:hover{
+
+    transform:translateY(-2px);
 
     box-shadow:
-        0 12px 30px rgba(139,92,246,.25);
+        0 15px 35px
+        rgba(139,92,246,.3);
 }
 
 
-/* =========================================================
-   EMPTY CART
-========================================================= */
+/* EMPTY CART */
 
-.empty-cart {
-    padding: 60px 20px;
+.empty-cart{
 
-    text-align: center;
+    padding:80px 20px;
 
-    color: var(--muted);
+    text-align:center;
+
+    color:var(--muted);
 }
 
-.empty-cart-icon {
-    font-size: 45px;
+.empty-cart-icon{
 
-    margin-bottom: 15px;
+    font-size:45px;
+
+    margin-bottom:15px;
 }
 
-.empty-cart h3 {
-    color: white;
+.empty-cart h3{
 
-    margin-bottom: 8px;
+    color:white;
+
+    margin-bottom:7px;
 }
 
 
@@ -1146,40 +1581,50 @@ header {
    TOAST
 ========================================================= */
 
-.toast {
-    position: fixed;
+.toast{
 
-    left: 50%;
-    bottom: 25px;
+    position:fixed;
 
-    z-index: 500;
+    left:50%;
+    bottom:25px;
 
-    max-width: calc(100% - 30px);
+    transform:
+        translate(-50%,30px);
 
-    padding: 13px 18px;
+    z-index:1000;
 
-    border: 1px solid var(--border);
-    border-radius: 12px;
+    padding:13px 18px;
 
-    background: #171923;
+    border:1px solid var(--border);
 
-    color: white;
+    border-radius:13px;
 
-    box-shadow: var(--shadow);
+    background:
+        rgba(20,22,32,.95);
 
-    opacity: 0;
+    backdrop-filter:blur(15px);
 
-    pointer-events: none;
+    color:white;
 
-    transform: translate(-50%, 30px);
+    font-size:12px;
 
-    transition: .3s;
+    box-shadow:
+        0 15px 50px
+        rgba(0,0,0,.4);
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:.3s;
 }
 
-.toast.show {
-    opacity: 1;
+.toast.show{
 
-    transform: translate(-50%, 0);
+    opacity:1;
+
+    transform:
+        translate(-50%,0);
 }
 
 
@@ -1187,26 +1632,31 @@ header {
    FOOTER
 ========================================================= */
 
-footer {
-    border-top: 1px solid var(--border);
+footer{
 
-    padding: 35px 24px;
+    border-top:
+        1px solid var(--border);
 
-    text-align: center;
+    padding:40px 25px;
 
-    color: var(--muted);
+    text-align:center;
 
-    font-size: 12px;
+    color:var(--muted);
+
+    font-size:11px;
 }
 
-.footer-logo {
-    color: white;
+.footer-logo{
 
-    font-weight: 800;
+    color:white;
 
-    letter-spacing: 1px;
+    font-size:15px;
 
-    margin-bottom: 8px;
+    font-weight:800;
+
+    letter-spacing:2px;
+
+    margin-bottom:8px;
 }
 
 
@@ -1214,137 +1664,182 @@ footer {
    RESPONSIVE
 ========================================================= */
 
-@media (max-width: 1000px) {
+@media(max-width:1050px){
 
-    .hero-box {
-        padding: 50px;
+    .hero-box{
+
+        padding:55px;
+
     }
 
-    .hero-product {
-        right: -40px;
-        opacity: .45;
+    .device{
+
+        right:-50px;
+
+        opacity:.35;
     }
 
-    .products {
-        grid-template-columns: repeat(2, 1fr);
+    .products{
+
+        grid-template-columns:
+            repeat(2,1fr);
     }
 
-    .trust-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
+    .trust-grid{
 
-
-@media (max-width: 700px) {
-
-    .nav {
-        flex-wrap: wrap;
-        gap: 12px;
-    }
-
-    .logo {
-        flex: 1;
-    }
-
-    .search {
-        order: 3;
-
-        flex-basis: 100%;
-    }
-
-    .hero {
-        margin-top: 20px;
-    }
-
-    .hero-box {
-        min-height: 540px;
-
-        padding: 38px 25px;
-
-        align-items: flex-start;
-    }
-
-    .hero h1 {
-        letter-spacing: -2px;
-    }
-
-    .hero-product {
-        width: 190px;
-        height: 240px;
-
-        right: -45px;
-        bottom: 20px;
-
-        opacity: .28;
-    }
-
-    .hero-buttons {
-        flex-direction: column;
-
-        align-items: flex-start;
-    }
-
-    .section-head {
-        align-items: flex-start;
-
-        flex-direction: column;
-    }
-
-    .products {
-        grid-template-columns: 1fr;
-    }
-
-    .product-image {
-        height: 330px;
-    }
-
-    .trust-grid {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns:
+            repeat(2,1fr);
     }
 }
 
 
-@media (max-width: 450px) {
+@media(max-width:700px){
 
-    .nav {
-        padding: 14px 16px;
+    .nav{
+
+        flex-wrap:wrap;
+
+        gap:10px;
+
+        padding:
+            13px 16px;
     }
 
-    .hero,
-    .trust,
-    .store {
-        padding-left: 16px;
-        padding-right: 16px;
+    .logo{
+
+        flex:1;
     }
 
-    .hero-box {
-        min-height: 550px;
+    .search{
 
-        border-radius: 24px;
+        order:3;
+
+        flex-basis:100%;
     }
 
-    .hero h1 {
-        font-size: 42px;
+    .hero{
+
+        margin-top:18px;
+
+        padding:
+            0 16px;
     }
 
-    .trust-grid {
-        grid-template-columns: 1fr;
+    .hero-box{
+
+        min-height:570px;
+
+        padding:
+            38px 25px;
+
+        border-radius:25px;
+
+        align-items:flex-start;
     }
 
-    .product-image {
-        height: 300px;
+    .hero h1{
+
+        font-size:47px;
+
+        letter-spacing:-3px;
     }
 
-    .cart {
-        padding: 20px;
+    .hero p{
+
+        font-size:13px;
+    }
+
+    .hero-buttons{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+    }
+
+    .device{
+
+        width:190px;
+        height:250px;
+
+        right:-35px;
+
+        bottom:25px;
+
+        opacity:.28;
+    }
+
+    .trust{
+
+        padding:
+            0 16px;
+    }
+
+    .trust-grid{
+
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .store{
+
+        padding:
+            0 16px 60px;
+    }
+
+    .store-header{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+    }
+
+    .products{
+
+        grid-template-columns:1fr;
+    }
+
+    .product-image{
+
+        height:320px;
+    }
+}
+
+
+@media(max-width:430px){
+
+    .trust-grid{
+
+        grid-template-columns:1fr;
+    }
+
+    .hero h1{
+
+        font-size:42px;
+    }
+
+    .hero-box{
+
+        min-height:570px;
+    }
+
+    .cart{
+
+        padding:20px;
     }
 }
 
 </style>
+
 </head>
 
 
 <body>
+
+
+<!-- AMBIENT LIGHT -->
+
+<div class="ambient one"></div>
+<div class="ambient two"></div>
 
 
 <!-- =======================================================
@@ -1355,20 +1850,28 @@ footer {
 
 <nav class="nav">
 
+
     <div class="logo">
+
+        <div class="logo-mark">
+            N
+        </div>
+
         NEXUS<span>PRIME</span>
+
     </div>
 
 
     <div class="search">
 
-        <span class="search-icon">⌕</span>
+        <span class="search-icon">
+            ⌕
+        </span>
 
         <input
-            type="search"
             id="search"
-            placeholder="Search smartphones, audio, laptops..."
-            aria-label="Search products"
+            type="search"
+            placeholder="Search products..."
             oninput="searchProducts()"
         >
 
@@ -1380,7 +1883,6 @@ footer {
         <button
             class="icon-btn"
             onclick="showWishlist()"
-            aria-label="Open wishlist"
             title="Wishlist">
 
             ♡
@@ -1397,7 +1899,6 @@ footer {
         <button
             class="icon-btn"
             onclick="openCart()"
-            aria-label="Open shopping cart"
             title="Shopping cart">
 
             🛒
@@ -1425,25 +1926,32 @@ footer {
 
 <div class="hero-box">
 
+
+    <div class="hero-grid"></div>
+
+    <div class="hero-glow"></div>
+
+
     <div class="hero-content">
+
 
         <div class="eyebrow">
 
-            <span class="dot"></span>
+            <span class="live-dot"></span>
 
-            NEW COLLECTION 2026
+            NEXT-GEN COLLECTION · 2026
 
         </div>
 
 
         <h1>
 
-            Technology
+            The future
 
             <br>
 
-            <span class="gradient-text">
-                Without Limits.
+            <span class="gradient">
+                is in your hands.
             </span>
 
         </h1>
@@ -1451,9 +1959,9 @@ footer {
 
         <p>
 
-            Discover premium gadgets, intelligent devices
-            and next-generation technology designed for
-            the way you live today.
+            Explore premium technology designed
+            to make everyday life smarter, faster
+            and more connected.
 
         </p>
 
@@ -1471,9 +1979,9 @@ footer {
 
             <button
                 class="btn"
-                onclick="showToast('Free shipping on orders over $100')">
+                onclick="showToast('Free shipping on orders over $100 🚚')">
 
-                🚚 Free Shipping
+                Free Shipping
 
             </button>
 
@@ -1482,14 +1990,15 @@ footer {
     </div>
 
 
-    <div class="hero-product">
+    <div class="device">
 
         <img
-            src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=700&q=85"
+            src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=900&q=90"
             alt="Premium smartphone"
         >
 
     </div>
+
 
 </div>
 
@@ -1505,39 +2014,45 @@ footer {
 <div class="trust-grid">
 
 
-    <div class="trust-item">
+    <div class="trust-card">
 
-        <div class="trust-icon">⚡</div>
+        <div class="trust-icon">
+            ⚡
+        </div>
 
         <strong>
-            Fast Delivery
+            Lightning Fast
         </strong>
 
         <span>
-            Express shipping worldwide
+            Express worldwide delivery
         </span>
 
     </div>
 
 
-    <div class="trust-item">
+    <div class="trust-card">
 
-        <div class="trust-icon">🔐</div>
+        <div class="trust-icon">
+            🔐
+        </div>
 
         <strong>
-            Secure Payment
+            Secure Checkout
         </strong>
 
         <span>
-            Protected checkout experience
+            Your payment is protected
         </span>
 
     </div>
 
 
-    <div class="trust-item">
+    <div class="trust-card">
 
-        <div class="trust-icon">↩️</div>
+        <div class="trust-icon">
+            ↩️
+        </div>
 
         <strong>
             Easy Returns
@@ -1550,16 +2065,18 @@ footer {
     </div>
 
 
-    <div class="trust-item">
+    <div class="trust-card">
 
-        <div class="trust-icon">★</div>
+        <div class="trust-icon">
+            ✦
+        </div>
 
         <strong>
             Premium Support
         </strong>
 
         <span>
-            We're here whenever you need us
+            Expert help whenever you need
         </span>
 
     </div>
@@ -1579,22 +2096,25 @@ footer {
     id="products">
 
 
-    <div class="section-head">
+    <div class="store-header">
 
-        <div>
+
+        <div class="store-title">
 
             <h2>
-                Trending Products
+                Trending Now
             </h2>
 
             <p>
-                Hand-picked technology for modern life.
+                Technology worth experiencing.
             </p>
 
             <div
                 class="product-count"
                 id="productCount">
+
                 6 products
+
             </div>
 
         </div>
@@ -1603,8 +2123,7 @@ footer {
         <select
             class="sort"
             id="sort"
-            onchange="sortProducts(this.value)"
-            aria-label="Sort products">
+            onchange="sortProducts(this.value)">
 
             <option value="default">
                 Featured
@@ -1623,13 +2142,14 @@ footer {
     </div>
 
 
-    <!-- CATEGORY FILTERS -->
+    <!-- CATEGORY FILTER -->
 
-    <div class="store-controls">
+    <div class="category-bar">
+
 
         <button
-            class="filter-btn active"
-            onclick="filterCategory('All', this)">
+            class="category active"
+            onclick="filterCategory('All',this)">
 
             All Products
 
@@ -1637,8 +2157,8 @@ footer {
 
 
         <button
-            class="filter-btn"
-            onclick="filterCategory('Smartphones', this)">
+            class="category"
+            onclick="filterCategory('Smartphones',this)">
 
             Smartphones
 
@@ -1646,8 +2166,8 @@ footer {
 
 
         <button
-            class="filter-btn"
-            onclick="filterCategory('Audio', this)">
+            class="category"
+            onclick="filterCategory('Audio',this)">
 
             Audio
 
@@ -1655,8 +2175,8 @@ footer {
 
 
         <button
-            class="filter-btn"
-            onclick="filterCategory('Wearables', this)">
+            class="category"
+            onclick="filterCategory('Wearables',this)">
 
             Wearables
 
@@ -1664,8 +2184,8 @@ footer {
 
 
         <button
-            class="filter-btn"
-            onclick="filterCategory('Laptops', this)">
+            class="category"
+            onclick="filterCategory('Laptops',this)">
 
             Laptops
 
@@ -1673,8 +2193,8 @@ footer {
 
 
         <button
-            class="filter-btn"
-            onclick="filterCategory('Gaming', this)">
+            class="category"
+            onclick="filterCategory('Gaming',this)">
 
             Gaming
 
@@ -1682,8 +2202,8 @@ footer {
 
 
         <button
-            class="filter-btn"
-            onclick="filterCategory('Cameras', this)">
+            class="category"
+            onclick="filterCategory('Cameras',this)">
 
             Cameras
 
@@ -1692,13 +2212,14 @@ footer {
     </div>
 
 
-    <!-- PRODUCT GRID -->
+    <!-- PRODUCTS -->
 
     <div
         class="products"
         id="productGrid">
 
     </div>
+
 
 </section>
 
@@ -1715,7 +2236,7 @@ footer {
     <div class="cart">
 
 
-        <div class="cart-head">
+        <div class="cart-header">
 
             <div>
 
@@ -1723,17 +2244,16 @@ footer {
                     Your Cart
                 </h2>
 
-                <div class="cart-subtitle">
-                    Review your selected products
-                </div>
+                <p>
+                    Your selected products
+                </p>
 
             </div>
 
 
             <button
                 class="close"
-                onclick="closeCart()"
-                aria-label="Close cart">
+                onclick="closeCart()">
 
                 ×
 
@@ -1752,7 +2272,7 @@ footer {
         <div class="cart-footer">
 
 
-            <div class="subtotal-row">
+            <div class="summary-row">
 
                 <span>
                     Subtotal
@@ -1765,7 +2285,7 @@ footer {
             </div>
 
 
-            <div class="shipping-row">
+            <div class="summary-row muted">
 
                 <span>
                     Shipping
@@ -1806,21 +2326,15 @@ footer {
 </div>
 
 
-<!-- =======================================================
-     TOAST
-======================================================== -->
+<!-- TOAST -->
 
 <div
     class="toast"
-    id="toast"
-    role="status">
-
+    id="toast">
 </div>
 
 
-<!-- =======================================================
-     FOOTER
-======================================================== -->
+<!-- FOOTER -->
 
 <footer>
 
@@ -1828,7 +2342,7 @@ footer {
         NEXUS PRIME
     </div>
 
-    © 2026 NEXUS PRIME — Designed for the future.
+    © 2026 NEXUS PRIME · Technology without limits.
 
 </footer>
 
@@ -1836,75 +2350,75 @@ footer {
 <script>
 
 /* =========================================================
-   PRODUCT DATA
+   PRODUCTS
 ========================================================= */
 
 const products = [
 
     {
-        id: 1,
-        name: "Nova X Smartphone",
-        category: "Smartphones",
-        price: 899,
-        rating: "★★★★★",
-        tag: "BESTSELLER",
+        id:1,
+        name:"Nova X Smartphone",
+        category:"Smartphones",
+        price:899,
+        rating:"★★★★★",
+        tag:"BESTSELLER",
         image:
-        "https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=800&q=85"
+        "https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=900&q=90"
     },
 
     {
-        id: 2,
-        name: "Aero Max Headphones",
-        category: "Audio",
-        price: 249,
-        rating: "★★★★★",
-        tag: "NEW",
+        id:2,
+        name:"Aero Max Headphones",
+        category:"Audio",
+        price:249,
+        rating:"★★★★★",
+        tag:"NEW",
         image:
-        "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=85"
+        "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=900&q=90"
     },
 
     {
-        id: 3,
-        name: "Vision Pro Watch",
-        category: "Wearables",
-        price: 399,
-        rating: "★★★★☆",
-        tag: "TRENDING",
+        id:3,
+        name:"Vision Pro Watch",
+        category:"Wearables",
+        price:399,
+        rating:"★★★★☆",
+        tag:"TRENDING",
         image:
-        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=85"
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=90"
     },
 
     {
-        id: 4,
-        name: "UltraBook Air",
-        category: "Laptops",
-        price: 1299,
-        rating: "★★★★★",
-        tag: "PREMIUM",
+        id:4,
+        name:"UltraBook Air",
+        category:"Laptops",
+        price:1299,
+        rating:"★★★★★",
+        tag:"PREMIUM",
         image:
-        "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=85"
+        "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=900&q=90"
     },
 
     {
-        id: 5,
-        name: "Pulse Gaming Console",
-        category: "Gaming",
-        price: 499,
-        rating: "★★★★★",
-        tag: "HOT",
+        id:5,
+        name:"Pulse Gaming Console",
+        category:"Gaming",
+        price:499,
+        rating:"★★★★★",
+        tag:"HOT",
         image:
-        "https://images.unsplash.com/photo-1605901309584-818e25960a8f?auto=format&fit=crop&w=800&q=85"
+        "https://images.unsplash.com/photo-1605901309584-818e25960a8f?auto=format&fit=crop&w=900&q=90"
     },
 
     {
-        id: 6,
-        name: "Studio Camera X",
-        category: "Cameras",
-        price: 749,
-        rating: "★★★★☆",
-        tag: "LIMITED",
+        id:6,
+        name:"Studio Camera X",
+        category:"Cameras",
+        price:749,
+        rating:"★★★★☆",
+        tag:"LIMITED",
         image:
-        "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=800&q=85"
+        "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=900&q=90"
     }
 
 ];
@@ -1928,10 +2442,10 @@ let currentCategory = "All";
 
 
 /* =========================================================
-   RENDER PRODUCTS
+   RENDER
 ========================================================= */
 
-function renderProducts(list = products) {
+function renderProducts(list){
 
     const grid =
         document.getElementById("productGrid");
@@ -1942,10 +2456,14 @@ function renderProducts(list = products) {
     document.getElementById(
         "productCount"
     ).textContent =
-        `${list.length} ${list.length === 1 ? "product" : "products"}`;
+        `${list.length} ${
+            list.length === 1
+            ? "product"
+            : "products"
+        }`;
 
 
-    if (!list.length) {
+    if(!list.length){
 
         grid.innerHTML = `
 
@@ -1956,7 +2474,7 @@ function renderProducts(list = products) {
                 </div>
 
                 <h3>
-                    No products found
+                    Nothing found
                 </h3>
 
                 <p>
@@ -1989,6 +2507,7 @@ function renderProducts(list = products) {
                         loading="lazy"
                     >
 
+
                     <span class="tag">
                         ${product.tag}
                     </span>
@@ -1997,7 +2516,7 @@ function renderProducts(list = products) {
                     <button
                         class="heart ${liked ? "liked" : ""}"
                         onclick="toggleWishlist(${product.id})"
-                        aria-label="Add ${product.name} to wishlist">
+                        aria-label="Wishlist">
 
                         ${liked ? "♥" : "♡"}
 
@@ -2008,7 +2527,7 @@ function renderProducts(list = products) {
 
                 <div class="product-info">
 
-                    <div class="category">
+                    <div class="category-label">
                         ${product.category}
                     </div>
 
@@ -2023,7 +2542,7 @@ function renderProducts(list = products) {
                     </div>
 
 
-                    <div class="price-row">
+                    <div class="product-bottom">
 
                         <div class="price">
                             $${product.price.toLocaleString()}
@@ -2033,7 +2552,6 @@ function renderProducts(list = products) {
                         <button
                             class="add"
                             onclick="addToCart(${product.id})"
-                            aria-label="Add ${product.name} to cart"
                             title="Add to cart">
 
                             +
@@ -2054,10 +2572,10 @@ function renderProducts(list = products) {
 
 
 /* =========================================================
-   SEARCH
+   FILTER + SEARCH
 ========================================================= */
 
-function searchProducts() {
+function searchProducts(){
 
     const query =
         document
@@ -2070,44 +2588,56 @@ function searchProducts() {
     let result =
         products.filter(product => {
 
-            const matchesSearch =
+            const searchMatch =
+
                 product.name
                     .toLowerCase()
-                    .includes(query) ||
+                    .includes(query)
+
+                ||
 
                 product.category
                     .toLowerCase()
                     .includes(query);
 
 
-            const matchesCategory =
-                currentCategory === "All" ||
-                product.category === currentCategory;
+            const categoryMatch =
+
+                currentCategory === "All"
+
+                ||
+
+                product.category ===
+                currentCategory;
 
 
-            return matchesSearch && matchesCategory;
+            return (
+                searchMatch &&
+                categoryMatch
+            );
 
         });
 
 
-    applySorting(result);
+    applySort(result);
 
 }
 
 
 /* =========================================================
-   CATEGORY FILTER
+   CATEGORY
 ========================================================= */
 
-function filterCategory(category, button) {
+function filterCategory(category,button){
 
-    currentCategory = category;
+    currentCategory =
+        category;
 
 
     document
-        .querySelectorAll(".filter-btn")
-        .forEach(btn =>
-            btn.classList.remove("active")
+        .querySelectorAll(".category")
+        .forEach(item =>
+            item.classList.remove("active")
         );
 
 
@@ -2123,88 +2653,34 @@ function filterCategory(category, button) {
    SORT
 ========================================================= */
 
-function sortProducts(type) {
+function sortProducts(){
 
     searchProducts();
-
-
-    const query =
-        document
-            .getElementById("search")
-            .value
-            .toLowerCase()
-            .trim();
-
-
-    let result =
-        products.filter(product => {
-
-            const searchMatch =
-                product.name
-                    .toLowerCase()
-                    .includes(query) ||
-
-                product.category
-                    .toLowerCase()
-                    .includes(query);
-
-
-            const categoryMatch =
-                currentCategory === "All" ||
-                product.category === currentCategory;
-
-
-            return searchMatch && categoryMatch;
-
-        });
-
-
-    if (type === "low") {
-
-        result.sort(
-            (a,b) => a.price - b.price
-        );
-
-    }
-
-
-    if (type === "high") {
-
-        result.sort(
-            (a,b) => b.price - a.price
-        );
-
-    }
-
-
-    renderProducts(result);
 
 }
 
 
-/* =========================================================
-   APPLY SORTING
-========================================================= */
-
-function applySorting(list) {
+function applySort(list){
 
     const type =
         document.getElementById("sort").value;
 
 
-    if (type === "low") {
+    if(type === "low"){
 
         list.sort(
-            (a,b) => a.price - b.price
+            (a,b) =>
+                a.price - b.price
         );
 
     }
 
 
-    if (type === "high") {
+    if(type === "high"){
 
         list.sort(
-            (a,b) => b.price - a.price
+            (a,b) =>
+                b.price - a.price
         );
 
     }
@@ -2216,14 +2692,14 @@ function applySorting(list) {
 
 
 /* =========================================================
-   ADD TO CART
+   CART
 ========================================================= */
 
-function addToCart(id) {
+function addToCart(id){
 
     const product =
         products.find(
-            product => product.id === id
+            p => p.id === id
         );
 
 
@@ -2233,15 +2709,15 @@ function addToCart(id) {
         );
 
 
-    if (existing) {
+    if(existing){
 
         existing.qty++;
 
-    } else {
+    }else{
 
         cart.push({
             ...product,
-            qty: 1
+            qty:1
         });
 
     }
@@ -2259,11 +2735,7 @@ function addToCart(id) {
 }
 
 
-/* =========================================================
-   CHANGE QUANTITY
-========================================================= */
-
-function changeQuantity(id, amount) {
+function changeQuantity(id,amount){
 
     const item =
         cart.find(
@@ -2271,13 +2743,13 @@ function changeQuantity(id, amount) {
         );
 
 
-    if (!item) return;
+    if(!item) return;
 
 
     item.qty += amount;
 
 
-    if (item.qty <= 0) {
+    if(item.qty <= 0){
 
         cart =
             cart.filter(
@@ -2294,17 +2766,7 @@ function changeQuantity(id, amount) {
 }
 
 
-/* =========================================================
-   REMOVE FROM CART
-========================================================= */
-
-function removeFromCart(id) {
-
-    const item =
-        cart.find(
-            item => item.id === id
-        );
-
+function removeFromCart(id){
 
     cart =
         cart.filter(
@@ -2316,14 +2778,9 @@ function removeFromCart(id) {
 
     updateCart();
 
-
-    if (item) {
-
-        showToast(
-            `${item.name} removed`
-        );
-
-    }
+    showToast(
+        "Item removed from cart"
+    );
 
 }
 
@@ -2332,10 +2789,12 @@ function removeFromCart(id) {
    UPDATE CART
 ========================================================= */
 
-function updateCart() {
+function updateCart(){
 
-    const items =
-        document.getElementById("cartItems");
+    const container =
+        document.getElementById(
+            "cartItems"
+        );
 
 
     let total = 0;
@@ -2343,12 +2802,12 @@ function updateCart() {
     let count = 0;
 
 
-    items.innerHTML = "";
+    container.innerHTML = "";
 
 
-    if (!cart.length) {
+    if(!cart.length){
 
-        items.innerHTML = `
+        container.innerHTML = `
 
             <div class="empty-cart">
 
@@ -2361,7 +2820,7 @@ function updateCart() {
                 </h3>
 
                 <p>
-                    Add something awesome to get started.
+                    Add something amazing.
                 </p>
 
             </div>
@@ -2379,7 +2838,7 @@ function updateCart() {
         count += item.qty;
 
 
-        items.innerHTML += `
+        container.innerHTML += `
 
             <div class="cart-item">
 
@@ -2389,14 +2848,14 @@ function updateCart() {
                 >
 
 
-                <div class="cart-item-info">
+                <div class="cart-info">
 
                     <h4>
                         ${item.name}
                     </h4>
 
 
-                    <div class="cart-item-price">
+                    <div class="cart-price">
                         $${item.price.toLocaleString()}
                     </div>
 
@@ -2404,8 +2863,7 @@ function updateCart() {
                     <div class="quantity">
 
                         <button
-                            onclick="changeQuantity(${item.id}, -1)"
-                            aria-label="Decrease quantity">
+                            onclick="changeQuantity(${item.id},-1)">
 
                             −
 
@@ -2418,8 +2876,7 @@ function updateCart() {
 
 
                         <button
-                            onclick="changeQuantity(${item.id}, 1)"
-                            aria-label="Increase quantity">
+                            onclick="changeQuantity(${item.id},1)">
 
                             +
 
@@ -2432,8 +2889,7 @@ function updateCart() {
 
                 <button
                     class="close"
-                    onclick="removeFromCart(${item.id})"
-                    aria-label="Remove ${item.name}">
+                    onclick="removeFromCart(${item.id})">
 
                     ×
 
@@ -2472,10 +2928,10 @@ function updateCart() {
 
 
 /* =========================================================
-   SAVE CART
+   STORAGE
 ========================================================= */
 
-function saveCart() {
+function saveCart(){
 
     localStorage.setItem(
         "nexusCart",
@@ -2486,10 +2942,10 @@ function saveCart() {
 
 
 /* =========================================================
-   OPEN CART
+   CART DRAWER
 ========================================================= */
 
-function openCart() {
+function openCart(){
 
     updateCart();
 
@@ -2499,40 +2955,34 @@ function openCart() {
         .classList.add("active");
 
 
-    document.body.style.overflow = "hidden";
+    document.body.style.overflow =
+        "hidden";
 
 }
 
 
-/* =========================================================
-   CLOSE CART
-========================================================= */
-
-function closeCart() {
+function closeCart(){
 
     document
         .getElementById("cartOverlay")
         .classList.remove("active");
 
 
-    document.body.style.overflow = "";
+    document.body.style.overflow =
+        "";
 
 }
 
-
-/* =========================================================
-   CLOSE CART WHEN CLICKING OUTSIDE
-========================================================= */
 
 document
     .getElementById("cartOverlay")
     .addEventListener(
         "click",
-        function(event) {
+        function(e){
 
-            if (
-                event.target === this
-            ) {
+            if(
+                e.target === this
+            ){
 
                 closeCart();
 
@@ -2542,17 +2992,13 @@ document
     );
 
 
-/* =========================================================
-   ESCAPE KEY
-========================================================= */
-
 document.addEventListener(
     "keydown",
-    function(event) {
+    function(e){
 
-        if (
-            event.key === "Escape"
-        ) {
+        if(
+            e.key === "Escape"
+        ){
 
             closeCart();
 
@@ -2566,11 +3012,11 @@ document.addEventListener(
    WISHLIST
 ========================================================= */
 
-function toggleWishlist(id) {
+function toggleWishlist(id){
 
-    if (
+    if(
         wishlist.includes(id)
-    ) {
+    ){
 
         wishlist =
             wishlist.filter(
@@ -2581,7 +3027,7 @@ function toggleWishlist(id) {
             "Removed from wishlist"
         );
 
-    } else {
+    }else{
 
         wishlist.push(id);
 
@@ -2605,13 +3051,9 @@ function toggleWishlist(id) {
 }
 
 
-/* =========================================================
-   SHOW WISHLIST
-========================================================= */
+function showWishlist(){
 
-function showWishlist() {
-
-    if (!wishlist.length) {
+    if(!wishlist.length){
 
         showToast(
             "Your wishlist is empty"
@@ -2622,27 +3064,27 @@ function showWishlist() {
     }
 
 
-    const wishlistProducts =
+    const items =
         products.filter(
             product =>
-                wishlist.includes(product.id)
+                wishlist.includes(
+                    product.id
+                )
         );
 
 
-    renderProducts(
-        wishlistProducts
-    );
+    renderProducts(items);
 
 
     document
         .getElementById("products")
         .scrollIntoView({
-            behavior: "smooth"
+            behavior:"smooth"
         });
 
 
     showToast(
-        `${wishlist.length} item(s) in your wishlist`
+        `${wishlist.length} wishlist item(s)`
     );
 
 }
@@ -2652,9 +3094,9 @@ function showWishlist() {
    CHECKOUT
 ========================================================= */
 
-function checkout() {
+function checkout(){
 
-    if (!cart.length) {
+    if(!cart.length){
 
         showToast(
             "Your cart is empty"
@@ -2679,10 +3121,12 @@ function checkout() {
 let toastTimer;
 
 
-function showToast(message) {
+function showToast(message){
 
     const toast =
-        document.getElementById("toast");
+        document.getElementById(
+            "toast"
+        );
 
 
     toast.textContent =
@@ -2715,15 +3159,15 @@ function showToast(message) {
 
 
 /* =========================================================
-   SCROLL TO PRODUCTS
+   SCROLL
 ========================================================= */
 
-function scrollToProducts() {
+function scrollToProducts(){
 
     document
         .getElementById("products")
         .scrollIntoView({
-            behavior: "smooth"
+            behavior:"smooth"
         });
 
 }
@@ -2733,7 +3177,7 @@ function scrollToProducts() {
    INITIALIZE
 ========================================================= */
 
-renderProducts();
+renderProducts(products);
 
 updateCart();
 
