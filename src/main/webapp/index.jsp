@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="LUMINA modern e‑commerce store — discover curated products.">
     <title>LUMINA · e‑commerce UI</title>
-    <!-- Font Awesome (defer for performance) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" 
+    <!-- Font Awesome (with SRI for integrity) -->
+    <link rel="stylesheet" 
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" 
           integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" 
-          crossorigin="anonymous" referrerpolicy="no-referrer">
+          crossorigin="anonymous" 
+          referrerpolicy="no-referrer">
     <style>
         /* ---------- RESET & GLOBAL ---------- */
         *,
@@ -54,6 +56,18 @@
             cursor: pointer;
             font: inherit;
             color: inherit;
+        }
+
+        /* Font Awesome icons inside <em> — ensure they don't look italic */
+        em.fa,
+        em.fas,
+        em.far,
+        em.fab,
+        em.fa-solid,
+        em.fa-regular,
+        em.fa-brands {
+            font-style: normal;
+            display: inline-block;
         }
 
         /* ---------- NAVBAR ---------- */
@@ -203,7 +217,9 @@
         }
 
         .hero-badge {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
             background: rgba(255, 255, 255, 0.12);
             padding: 0.4rem 1rem;
             border-radius: 40px;
@@ -301,7 +317,7 @@
             flex-shrink: 0;
         }
 
-        .hero-visual i {
+        .hero-visual em {
             font-size: 5rem;
             color: rgba(255, 255, 255, 0.9);
             filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.3));
@@ -368,7 +384,7 @@
             gap: 8px;
         }
 
-        .category-pill i {
+        .category-pill em {
             color: #5a5a72;
             font-size: 0.9rem;
         }
@@ -384,8 +400,8 @@
             outline-offset: 2px;
         }
 
-        .category-pill:hover i,
-        .category-pill:focus-visible i {
+        .category-pill:hover em,
+        .category-pill:focus-visible em {
             color: #d4d4e6;
         }
 
@@ -395,7 +411,7 @@
             border-color: #1e1e2f;
         }
 
-        .category-pill.active i {
+        .category-pill.active em {
             color: white;
         }
 
@@ -588,7 +604,7 @@
             gap: 1rem;
         }
 
-        .trust-item i {
+        .trust-item em {
             font-size: 1.8rem;
             color: #1e1e2f;
             background: #f2f2fa;
@@ -635,7 +651,7 @@
                 width: 150px;
                 height: 150px;
             }
-            .hero-visual i {
+            .hero-visual em {
                 font-size: 4rem;
             }
             .nav-links {
@@ -704,7 +720,7 @@
         <nav class="navbar" aria-label="Main navigation">
             <div class="logo-area">
                 <div class="logo-icon" aria-hidden="true">
-                    <i class="fas fa-bolt"></i>
+                    <em class="fas fa-bolt"></em>
                 </div>
                 <div class="logo-text">LUMINA</div>
             </div>
@@ -716,10 +732,10 @@
             </div>
             <div class="nav-actions">
                 <button class="icon-btn" type="button" aria-label="Search products">
-                    <i class="fas fa-search" aria-hidden="true"></i>
+                    <em class="fas fa-search" aria-hidden="true"></em>
                 </button>
                 <button class="icon-btn" type="button" aria-label="Shopping cart, 3 items">
-                    <i class="fas fa-shopping-bag" aria-hidden="true"></i>
+                    <em class="fas fa-shopping-bag" aria-hidden="true"></em>
                     <span class="cart-badge" aria-hidden="true">3</span>
                 </button>
                 <div class="avatar" role="button" tabindex="0" aria-label="User account: John Doe">JD</div>
@@ -730,55 +746,55 @@
         <header class="hero-section" id="home">
             <div class="hero-content">
                 <div class="hero-badge">
-                    <i class="fas fa-tag" style="margin-right: 6px;" aria-hidden="true"></i> Spring drop 2025
+                    <em class="fas fa-tag" aria-hidden="true"></em> Spring drop 2025
                 </div>
                 <h1>Elevate your <span>everyday</span> style.</h1>
                 <p>Discover curated pieces that blend comfort, quality, and modern design. Free shipping over $75.</p>
                 <div class="hero-cta">
                     <button class="btn-primary" type="button">
-                        <i class="fas fa-bag-shopping" aria-hidden="true"></i> Shop now
+                        <em class="fas fa-bag-shopping" aria-hidden="true"></em> Shop now
                     </button>
                     <button class="btn-outline" type="button">
-                        <i class="fas fa-arrow-right" aria-hidden="true"></i> Explore lookbook
+                        <em class="fas fa-arrow-right" aria-hidden="true"></em> Explore lookbook
                     </button>
                 </div>
             </div>
             <div class="hero-visual" aria-hidden="true">
-                <i class="fas fa-crown"></i>
+                <em class="fas fa-crown"></em>
             </div>
         </header>
 
         <!-- Categories -->
         <div class="section-header">
             <h2>Browse categories</h2>
-            <a href="#categories">View all <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+            <a href="#categories">View all <em class="fas fa-arrow-right" aria-hidden="true"></em></a>
         </div>
         <div class="category-row" id="categories">
-            <button class="category-pill active" type="button"><i class="fas fa-star" aria-hidden="true"></i> Featured</button>
-            <button class="category-pill" type="button"><i class="fas fa-tshirt" aria-hidden="true"></i> Apparel</button>
-            <button class="category-pill" type="button"><i class="fas fa-shoe-prints" aria-hidden="true"></i> Footwear</button>
-            <button class="category-pill" type="button"><i class="fas fa-clock" aria-hidden="true"></i> Accessories</button>
-            <button class="category-pill" type="button"><i class="fas fa-laptop" aria-hidden="true"></i> Tech</button>
-            <button class="category-pill" type="button"><i class="fas fa-home" aria-hidden="true"></i> Home</button>
+            <button class="category-pill active" type="button"><em class="fas fa-star" aria-hidden="true"></em> Featured</button>
+            <button class="category-pill" type="button"><em class="fas fa-tshirt" aria-hidden="true"></em> Apparel</button>
+            <button class="category-pill" type="button"><em class="fas fa-shoe-prints" aria-hidden="true"></em> Footwear</button>
+            <button class="category-pill" type="button"><em class="fas fa-clock" aria-hidden="true"></em> Accessories</button>
+            <button class="category-pill" type="button"><em class="fas fa-laptop" aria-hidden="true"></em> Tech</button>
+            <button class="category-pill" type="button"><em class="fas fa-home" aria-hidden="true"></em> Home</button>
         </div>
 
         <!-- Product grid -->
         <div class="section-header">
             <h2>Trending now</h2>
-            <a href="#trending">See all <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+            <a href="#trending">See all <em class="fas fa-arrow-right" aria-hidden="true"></em></a>
         </div>
 
         <div class="product-grid" id="trending">
             <!-- product 1 -->
             <article class="product-card">
                 <button class="wishlist-btn" type="button" aria-label="Add Aura Headphones to wishlist">
-                    <i class="far fa-heart" aria-hidden="true"></i>
+                    <em class="far fa-heart" aria-hidden="true"></em>
                 </button>
                 <div class="product-image" aria-hidden="true">
-                    <i class="fas fa-headphones"></i>
+                    <em class="fas fa-headphones"></em>
                 </div>
                 <div class="rating" aria-label="Rated 4.5 out of 5 stars, 42 reviews">
-                    <i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                    <em class="fas fa-star" aria-hidden="true"></em><em class="fas fa-star" aria-hidden="true"></em><em class="fas fa-star" aria-hidden="true"></em><em class="fas fa-star" aria-hidden="true"></em><em class="fas fa-star-half-alt" aria-hidden="true"></em>
                     <span>(42)</span>
                 </div>
                 <h3 class="product-title">Aura Headphones</h3>
@@ -786,22 +802,22 @@
                 <div class="product-meta">
                     <div class="product-price">$129 <span>$189</span></div>
                     <button class="add-to-cart" type="button" aria-label="Add Aura Headphones to cart">
-                        <i class="fas fa-plus" aria-hidden="true"></i>
+                        <em class="fas fa-plus" aria-hidden="true"></em>
                     </button>
                 </div>
-                <div class="free-shipping-tag"><i class="fas fa-truck" aria-hidden="true"></i> Free shipping</div>
+                <div class="free-shipping-tag"><em class="fas fa-truck" aria-hidden="true"></em> Free shipping</div>
             </article>
 
             <!-- product 2 -->
             <article class="product-card">
                 <button class="wishlist-btn" type="button" aria-label="Add Nova X to wishlist">
-                    <i class="far fa-heart" aria-hidden="true"></i>
+                    <em class="far fa-heart" aria-hidden="true"></em>
                 </button>
                 <div class="product-image" aria-hidden="true">
-                    <i class="fas fa-mobile-alt"></i>
+                    <em class="fas fa-mobile-alt"></em>
                 </div>
                 <div class="rating" aria-label="Rated 4 out of 5 stars, 18 reviews">
-                    <i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="far fa-star" aria-hidden="true"></i>
+                    <em class="fas fa-star" aria-hidden="true"></em><em class="fas fa-star" aria-hidden="true"></em><em class="fas fa-star" aria-hidden="true"></em><em class="fas fa-star" aria-hidden="true"></em><em class="far fa-star" aria-hidden="true"></em>
                     <span>(18)</span>
                 </div>
                 <h3 class="product-title">Nova X</h3>
@@ -809,7 +825,7 @@
                 <div class="product-meta">
                     <div class="product-price">$699 <span>$799</span></div>
                     <button class="add-to-cart" type="button" aria-label="Add Nova X to cart">
-                        <i class="fas fa-plus" aria-hidden="true"></i>
+                        <em class="fas fa-plus" aria-hidden="true"></em>
                     </button>
                 </div>
             </article>
@@ -817,13 +833,13 @@
             <!-- product 3 -->
             <article class="product-card">
                 <button class="wishlist-btn" type="button" aria-label="Add Oversized Tee to wishlist">
-                    <i class="far fa-heart" aria-hidden="true"></i>
+                    <em class="far fa-heart" aria-hidden="true"></em>
                 </button>
                 <div class="product-image" aria-hidden="true">
-                    <i class="fas fa-tshirt"></i>
+                    <em class="fas fa-tshirt"></em>
                 </div>
                 <div class="rating" aria-label="Rated 5 out of 5 stars, 97 reviews">
-                    <i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i>
+                    <em class="fas fa-star" aria-hidden="true"></em><em class="fas fa-star" aria-hidden="true"></em><em class="fas fa-star" aria-hidden="true"></em><em class="fas fa-star" aria-hidden="true"></em><em class="fas fa-star" aria-hidden="true"></em>
                     <span>(97)</span>
                 </div>
                 <h3 class="product-title">Oversized Tee</h3>
@@ -831,22 +847,22 @@
                 <div class="product-meta">
                     <div class="product-price">$34 <span>$48</span></div>
                     <button class="add-to-cart" type="button" aria-label="Add Oversized Tee to cart">
-                        <i class="fas fa-plus" aria-hidden="true"></i>
+                        <em class="fas fa-plus" aria-hidden="true"></em>
                     </button>
                 </div>
-                <div class="free-shipping-tag"><i class="fas fa-truck" aria-hidden="true"></i> Free shipping</div>
+                <div class="free-shipping-tag"><em class="fas fa-truck" aria-hidden="true"></em> Free shipping</div>
             </article>
 
             <!-- product 4 -->
             <article class="product-card">
                 <button class="wishlist-btn" type="button" aria-label="Add Minimal Watch to wishlist">
-                    <i class="far fa-heart" aria-hidden="true"></i>
+                    <em class="far fa-heart" aria-hidden="true"></em>
                 </button>
                 <div class="product-image" aria-hidden="true">
-                    <i class="fas fa-watch"></i>
+                    <em class="fas fa-watch"></em>
                 </div>
                 <div class="rating" aria-label="Rated 4 out of 5 stars, 23 reviews">
-                    <i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="far fa-star" aria-hidden="true"></i>
+                    <em class="fas fa-star" aria-hidden="true"></em><em class="fas fa-star" aria-hidden="true"></em><em class="fas fa-star" aria-hidden="true"></em><em class="fas fa-star" aria-hidden="true"></em><em class="far fa-star" aria-hidden="true"></em>
                     <span>(23)</span>
                 </div>
                 <h3 class="product-title">Minimal Watch</h3>
@@ -854,7 +870,7 @@
                 <div class="product-meta">
                     <div class="product-price">$199 <span>$259</span></div>
                     <button class="add-to-cart" type="button" aria-label="Add Minimal Watch to cart">
-                        <i class="fas fa-plus" aria-hidden="true"></i>
+                        <em class="fas fa-plus" aria-hidden="true"></em>
                     </button>
                 </div>
             </article>
@@ -862,13 +878,13 @@
             <!-- product 5 -->
             <article class="product-card">
                 <button class="wishlist-btn" type="button" aria-label="Add SnapPro 2 to wishlist">
-                    <i class="far fa-heart" aria-hidden="true"></i>
+                    <em class="far fa-heart" aria-hidden="true"></em>
                 </button>
                 <div class="product-image" aria-hidden="true">
-                    <i class="fas fa-camera"></i>
+                    <em class="fas fa-camera"></em>
                 </div>
                 <div class="rating" aria-label="Rated 5 out of 5 stars, 56 reviews">
-                    <i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i>
+                    <em class="fas fa-star" aria-hidden="true"></em><em class="fas fa-star" aria-hidden="true"></em><em class="fas fa-star" aria-hidden="true"></em><em class="fas fa-star" aria-hidden="true"></em><em class="fas fa-star" aria-hidden="true"></em>
                     <span>(56)</span>
                 </div>
                 <h3 class="product-title">SnapPro 2</h3>
@@ -876,7 +892,7 @@
                 <div class="product-meta">
                     <div class="product-price">$849 <span>$999</span></div>
                     <button class="add-to-cart" type="button" aria-label="Add SnapPro 2 to cart">
-                        <i class="fas fa-plus" aria-hidden="true"></i>
+                        <em class="fas fa-plus" aria-hidden="true"></em>
                     </button>
                 </div>
             </article>
@@ -884,13 +900,13 @@
             <!-- product 6 -->
             <article class="product-card">
                 <button class="wishlist-btn" type="button" aria-label="Add Lounge Chair to wishlist">
-                    <i class="far fa-heart" aria-hidden="true"></i>
+                    <em class="far fa-heart" aria-hidden="true"></em>
                 </button>
                 <div class="product-image" aria-hidden="true">
-                    <i class="fas fa-chair"></i>
+                    <em class="fas fa-chair"></em>
                 </div>
                 <div class="rating" aria-label="Rated 4.5 out of 5 stars, 31 reviews">
-                    <i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                    <em class="fas fa-star" aria-hidden="true"></em><em class="fas fa-star" aria-hidden="true"></em><em class="fas fa-star" aria-hidden="true"></em><em class="fas fa-star" aria-hidden="true"></em><em class="fas fa-star-half-alt" aria-hidden="true"></em>
                     <span>(31)</span>
                 </div>
                 <h3 class="product-title">Lounge Chair</h3>
@@ -898,37 +914,21 @@
                 <div class="product-meta">
                     <div class="product-price">$289 <span>$399</span></div>
                     <button class="add-to-cart" type="button" aria-label="Add Lounge Chair to cart">
-                        <i class="fas fa-plus" aria-hidden="true"></i>
+                        <em class="fas fa-plus" aria-hidden="true"></em>
                     </button>
                 </div>
-                <div class="free-shipping-tag"><i class="fas fa-truck" aria-hidden="true"></i> Free shipping</div>
+                <div class="free-shipping-tag"><em class="fas fa-truck" aria-hidden="true"></em> Free shipping</div>
             </article>
         </div>
 
         <!-- trust / footer bar -->
         <div class="trust-bar">
             <div class="trust-item">
-                <i class="fas fa-truck-fast" aria-hidden="true"></i>
+                <em class="fas fa-truck-fast" aria-hidden="true"></em>
                 <div class="trust-text">
                     <h4>Free delivery</h4>
                     <p>On orders over $75</p>
                 </div>
             </div>
             <div class="trust-item">
-                <i class="fas fa-rotate-left" aria-hidden="true"></i>
-                <div class="trust-text">
-                    <h4>30-day returns</h4>
-                    <p>No questions asked</p>
-                </div>
-            </div>
-            <div class="trust-item">
-                <i class="fas fa-shield" aria-hidden="true"></i>
-                <div class="trust-text">
-                    <h4>Secure checkout</h4>
-                    <p>SSL encrypted</p>
-                </div>
-            </div>
-            <div class="trust-item">
-                <i class="fas fa-headset" aria-hidden="true"></i>
-                <div class="trust-text">
-                    <h4>24/7 support</h
+                <em class="fas fa
