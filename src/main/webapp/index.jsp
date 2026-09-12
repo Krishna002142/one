@@ -1,934 +1,760 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="LUMINA modern e‑commerce store — discover curated products.">
-    <title>LUMINA · e‑commerce UI</title>
-    <!-- Font Awesome (with SRI for integrity) -->
-    <link rel="stylesheet" 
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" 
-          integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" 
-          crossorigin="anonymous" 
-          referrerpolicy="no-referrer">
-    <style>
-        /* ---------- RESET & GLOBAL ---------- */
-        *,
-        *::before,
-        *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: system-ui, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        }
-
-        body {
-            background: #f7f8fc;
-            display: flex;
-            justify-content: center;
-            padding: 2rem 1rem;
-            min-height: 100vh;
-            line-height: 1.5;
-            color: #1e1e2f;
-        }
-
-        /* Visually hidden (for a11y labels) */
-        .visually-hidden {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            border: 0;
-        }
-
-        .app-container {
-            max-width: 1360px;
-            width: 100%;
-        }
-
-        /* ---------- BUTTON RESET ---------- */
-        button {
-            background: none;
-            border: none;
-            cursor: pointer;
-            font: inherit;
-            color: inherit;
-        }
-
-        /* Font Awesome icons inside <em> — ensure they don't look italic */
-        em.fa,
-        em.fas,
-        em.far,
-        em.fab,
-        em.fa-solid,
-        em.fa-regular,
-        em.fa-brands {
-            font-style: normal;
-            display: inline-block;
-        }
-
-        /* ---------- NAVBAR ---------- */
-        .navbar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 1rem;
-            background: #ffffff;
-            padding: 0.9rem 2rem;
-            border-radius: 50px;
-            box-shadow: 0 10px 25px -8px rgba(0, 0, 0, 0.08);
-            margin-bottom: 2.5rem;
-            border: 1px solid #eaeaef;
-        }
-
-        .logo-area {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .logo-icon {
-            background: #1e1e2f;
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-            flex-shrink: 0;
-        }
-
-        .logo-text {
-            font-weight: 700;
-            font-size: 1.5rem;
-            letter-spacing: -0.5px;
-            color: #1e1e2f;
-            white-space: nowrap;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.2rem;
-            font-weight: 500;
-            color: #3a3a4a;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: inherit;
-            font-size: 1rem;
-            transition: color 0.2s;
-        }
-
-        .nav-links a:hover,
-        .nav-links a:focus-visible {
-            color: #1e1e2f;
-            outline: 2px solid #1e1e2f;
-            outline-offset: 4px;
-            border-radius: 4px;
-        }
-
-        .nav-actions {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-        .icon-btn {
-            background: transparent;
-            border: none;
-            font-size: 1.3rem;
-            color: #3a3a4a;
-            cursor: pointer;
-            position: relative;
-            transition: color 0.2s, transform 0.1s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0.25rem;
-            border-radius: 8px;
-        }
-
-        .icon-btn:hover,
-        .icon-btn:focus-visible {
-            color: #1e1e2f;
-            transform: scale(1.05);
-            outline: 2px solid #1e1e2f;
-            outline-offset: 2px;
-        }
-
-        .cart-badge {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background: #b32b2b;
-            color: white;
-            font-size: 0.7rem;
-            font-weight: 700;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            pointer-events: none;
-        }
-
-        .avatar {
-            width: 42px;
-            height: 42px;
-            background: linear-gradient(145deg, #ddd6fe, #c7d2fe);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            color: #1e1e2f;
-            font-size: 1rem;
-            border: 2px solid white;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
-            cursor: pointer;
-            flex-shrink: 0;
-        }
-
-        /* ---------- HERO ---------- */
-        .hero-section {
-            background: linear-gradient(135deg, #1e1e2f 0%, #2d2d44 100%);
-            border-radius: 2.5rem;
-            padding: 2.5rem 3rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 3rem;
-            box-shadow: 0 25px 30px -12px rgba(0, 0, 0, 0.2);
-            color: white;
-            flex-wrap: wrap;
-            gap: 2rem;
-        }
-
-        .hero-content {
-            max-width: 550px;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(255, 255, 255, 0.12);
-            padding: 0.4rem 1rem;
-            border-radius: 40px;
-            font-size: 0.85rem;
-            letter-spacing: 0.5px;
-            font-weight: 500;
-            margin-bottom: 1.2rem;
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .hero-content h1 {
-            font-size: 2.8rem;
-            font-weight: 700;
-            line-height: 1.2;
-            letter-spacing: -1px;
-            margin-bottom: 1rem;
-        }
-
-        .hero-content h1 span {
-            color: #cbbdff;
-        }
-
-        .hero-content p {
-            color: #d4d4e6;
-            font-size: 1.1rem;
-            line-height: 1.5;
-            margin-bottom: 2rem;
-            max-width: 450px;
-        }
-
-        .hero-cta {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .btn-primary {
-            background: #ffffff;
-            color: #1e1e2f;
-            border: none;
-            padding: 0.9rem 2rem;
-            border-radius: 40px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 8px 18px -6px rgba(0, 0, 0, 0.3);
-        }
-
-        .btn-primary:hover,
-        .btn-primary:focus-visible {
-            background: #f0f0fa;
-            transform: scale(1.02);
-            outline: 3px solid #ffffff;
-            outline-offset: 2px;
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: white;
-            border: 2px solid rgba(255, 255, 255, 0.4);
-            padding: 0.9rem 2rem;
-            border-radius: 40px;
-            font-weight: 500;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn-outline:hover,
-        .btn-outline:focus-visible {
-            background: rgba(255, 255, 255, 0.12);
-            border-color: #ffffff;
-            outline: 3px solid #ffffff;
-            outline-offset: 2px;
-        }
-
-        .hero-visual {
-            background: radial-gradient(circle at 30% 30%, #4b3b8a, #1e1e2f);
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6), inset 0 0 30px rgba(255, 255, 255, 0.05);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            flex-shrink: 0;
-        }
-
-        .hero-visual em {
-            font-size: 5rem;
-            color: rgba(255, 255, 255, 0.9);
-            filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.3));
-        }
-
-        /* ---------- SECTION HEADERS ---------- */
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 1.8rem;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .section-header h2 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            color: #1e1e2f;
-        }
-
-        .section-header a {
-            text-decoration: none;
-            color: #3a3a4a;
-            font-weight: 500;
-            font-size: 0.95rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: color 0.2s;
-            border-radius: 6px;
-            padding: 0.2rem 0.4rem;
-        }
-
-        .section-header a:hover,
-        .section-header a:focus-visible {
-            color: #1e1e2f;
-            outline: 2px solid #1e1e2f;
-            outline-offset: 2px;
-        }
-
-        /* ---------- CATEGORIES ---------- */
-        .category-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-bottom: 2.8rem;
-        }
-
-        .category-pill {
-            background: white;
-            border: 1px solid #d0d0dd;
-            padding: 0.75rem 1.8rem;
-            border-radius: 40px;
-            font-weight: 500;
-            color: #1e1e2f;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .category-pill em {
-            color: #5a5a72;
-            font-size: 0.9rem;
-        }
-
-        .category-pill:hover,
-        .category-pill:focus-visible {
-            background: #1e1e2f;
-            border-color: #1e1e2f;
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 18px -8px rgba(0, 0, 0, 0.2);
-            outline: 2px solid #1e1e2f;
-            outline-offset: 2px;
-        }
-
-        .category-pill:hover em,
-        .category-pill:focus-visible em {
-            color: #d4d4e6;
-        }
-
-        .category-pill.active {
-            background: #1e1e2f;
-            color: white;
-            border-color: #1e1e2f;
-        }
-
-        .category-pill.active em {
-            color: white;
-        }
-
-        /* ---------- PRODUCT GRID ---------- */
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-            gap: 1.8rem;
-            margin-bottom: 2rem;
-        }
-
-        .product-card {
-            background: white;
-            border-radius: 1.8rem;
-            padding: 1.5rem 1.2rem 1.5rem;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 10px 22px -10px rgba(0, 0, 0, 0.04);
-            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s;
-            border: 1px solid #e4e4ec;
-            position: relative;
-        }
-
-        .product-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 25px 35px -12px rgba(0, 0, 0, 0.12);
-            border-color: #c8c8d8;
-        }
-
-        .wishlist-btn {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: white;
-            border: 1px solid #e4e4ec;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-            color: #5a5a72;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
-            transition: all 0.2s;
-            z-index: 2;
-        }
-
-        .wishlist-btn:hover,
-        .wishlist-btn:focus-visible {
-            color: #b32b2b;
-            background: #fff0f0;
-            transform: scale(1.1);
-            outline: 2px solid #b32b2b;
-            outline-offset: 2px;
-        }
-
-        .product-image {
-            background: #fafaff;
-            border-radius: 1.5rem;
-            height: 160px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.3rem;
-            font-size: 4rem;
-            color: #1e1e2f;
-            transition: background 0.2s;
-            border: 1px solid #f0f0f5;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .product-card:hover .product-image {
-            background: #f5f5fe;
-        }
-
-        .product-title {
-            font-weight: 600;
-            font-size: 1.1rem;
-            color: #1e1e2f;
-            margin-bottom: 0.3rem;
-            letter-spacing: -0.2px;
-        }
-
-        .product-sub {
-            font-size: 0.85rem;
-            color: #5e5e74;
-            margin-bottom: 0.7rem;
-            font-weight: 400;
-        }
-
-        .product-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: auto;
-        }
-
-        .product-price {
-            font-weight: 700;
-            font-size: 1.3rem;
-            color: #1e1e2f;
-            letter-spacing: -0.5px;
-            display: flex;
-            align-items: baseline;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
-
-        .product-price span {
-            font-size: 0.8rem;
-            font-weight: 400;
-            color: #7e7e93;
-            text-decoration: line-through;
-        }
-
-        .add-to-cart {
-            background: #1e1e2f;
-            color: white;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 14px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
-            flex-shrink: 0;
-        }
-
-        .add-to-cart:hover,
-        .add-to-cart:focus-visible {
-            background: #2d2d44;
-            transform: scale(1.05);
-            outline: 2px solid #1e1e2f;
-            outline-offset: 2px;
-        }
-
-        .rating {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 0.8rem;
-            color: #b8860b;
-            margin-bottom: 0.4rem;
-            flex-wrap: wrap;
-        }
-
-        .rating span {
-            color: #5e5e74;
-            font-size: 0.75rem;
-            margin-left: 4px;
-        }
-
-        .free-shipping-tag {
-            font-size: 0.7rem;
-            background: #e6f7e6;
-            color: #1f5a1f;
-            padding: 0.2rem 0.8rem;
-            border-radius: 50px;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            margin-top: 8px;
-            align-self: flex-start;
-        }
-
-        /* ---------- TRUST BAR ---------- */
-        .trust-bar {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            background: white;
-            border-radius: 2rem;
-            padding: 1.8rem 2.5rem;
-            margin-top: 3rem;
-            border: 1px solid #e4e4ec;
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.02);
-        }
-
-        .trust-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .trust-item em {
-            font-size: 1.8rem;
-            color: #1e1e2f;
-            background: #f2f2fa;
-            padding: 0.7rem;
-            border-radius: 16px;
-            width: 3.5rem;
-            text-align: center;
-            flex-shrink: 0;
-        }
-
-        .trust-text h4 {
-            font-size: 1rem;
-            font-weight: 600;
-            color: #1e1e2f;
-            margin-bottom: 0.15rem;
-        }
-
-        .trust-text p {
-            font-size: 0.85rem;
-            color: #5e5e74;
-        }
-
-        /* ---------- RESPONSIVE ---------- */
-        @media (max-width: 900px) {
-            .navbar {
-                padding: 0.9rem 1.5rem;
-            }
-            .hero-section {
-                padding: 2rem;
-                justify-content: center;
-                text-align: center;
-            }
-            .hero-content h1 {
-                font-size: 2.2rem;
-            }
-            .hero-content p {
-                margin-left: auto;
-                margin-right: auto;
-            }
-            .hero-cta {
-                justify-content: center;
-            }
-            .hero-visual {
-                width: 150px;
-                height: 150px;
-            }
-            .hero-visual em {
-                font-size: 4rem;
-            }
-            .nav-links {
-                display: none;
-            }
-        }
-
-        @media (max-width: 600px) {
-            body {
-                padding: 1rem 0.8rem;
-            }
-            .navbar {
-                border-radius: 30px;
-                padding: 0.8rem 1.2rem;
-            }
-            .section-header h2 {
-                font-size: 1.5rem;
-            }
-            .product-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 1rem;
-            }
-            .product-card {
-                padding: 1rem;
-            }
-            .product-image {
-                height: 120px;
-                font-size: 2.8rem;
-            }
-            .trust-bar {
-                flex-direction: column;
-                padding: 1.5rem;
-            }
-            .category-pill {
-                padding: 0.6rem 1.2rem;
-                font-size: 0.85rem;
-            }
-            .hero-content h1 {
-                font-size: 1.8rem;
-            }
-        }
-
-        @media (max-width: 400px) {
-            .product-grid {
-                grid-template-columns: 1fr;
-            }
-            .hero-section {
-                padding: 1.5rem;
-            }
-        }
-
-        /* Reduced motion preference */
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-                scroll-behavior: auto !important;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feastly · food for everyone</title>
+  <!-- Google Font & Font Awesome for friendly icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #fffcf9;
+      color: #1e1e2a;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    /* friendly & warm container */
+    .wrapper {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* --- HEADER --- */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 0;
+      flex-wrap: wrap;
+      gap: 16px;
+      border-bottom: 1px solid #f0e7e0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.9rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: #d45a2e;
+    }
+
+    .logo i {
+      font-size: 2.2rem;
+      color: #e86f3a;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      font-weight: 500;
+      color: #3d3d4e;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: inherit;
+      font-size: 1rem;
+      transition: color 0.2s;
+      padding: 6px 0;
+      border-bottom: 2px solid transparent;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #d45a2e;
+      border-bottom-color: #d45a2e;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .search-icon, .cart-icon {
+      font-size: 1.3rem;
+      color: #3d3d4e;
+      cursor: default;
+      transition: color 0.2s;
+    }
+
+    .cart-icon {
+      position: relative;
+    }
+
+    .cart-badge {
+      position: absolute;
+      top: -8px;
+      right: -10px;
+      background-color: #e86f3a;
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 600;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* --- HERO SECTION --- */
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      padding: 48px 0 60px;
+      flex-wrap: wrap;
+    }
+
+    .hero-content {
+      flex: 1 1 380px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background-color: #fef1e9;
+      color: #d45a2e;
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 6px 16px;
+      border-radius: 40px;
+      margin-bottom: 22px;
+      letter-spacing: 0.3px;
+    }
+
+    .hero-content h1 {
+      font-size: 3.3rem;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -1px;
+      margin-bottom: 20px;
+      color: #1e1e2a;
+    }
+
+    .hero-highlight {
+      color: #d45a2e;
+      background: linear-gradient(145deg, #fde7dc, #ffffff);
+      padding: 0 10px;
+      display: inline-block;
+      border-radius: 12px;
+    }
+
+    .hero-content p {
+      font-size: 1.15rem;
+      color: #5b5b6b;
+      margin-bottom: 32px;
+      max-width: 500px;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 32px;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 1rem;
+      border: none;
+      cursor: default;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background-color: #d45a2e;
+      color: white;
+      box-shadow: 0 8px 18px -6px rgba(212, 90, 46, 0.35);
+    }
+
+    .btn-primary:hover {
+      background-color: #b94a22;
+      transform: scale(1.02);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid #e0d6cf;
+      color: #3d3d4e;
+    }
+
+    .btn-outline:hover {
+      border-color: #d45a2e;
+      color: #d45a2e;
+      background-color: #fff9f5;
+    }
+
+    .hero-image {
+      flex: 1 1 380px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-image img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 42% 58% 38% 62% / 56% 48% 52% 44%;
+      box-shadow: 0 30px 40px -20px rgba(0, 0, 0, 0.15);
+      transition: border-radius 0.3s;
+      object-fit: cover;
+      width: 100%;
+      aspect-ratio: 1/1;
+      background: #fef1e9;
+    }
+
+    /* --- CATEGORIES (UI friendly quick picks) --- */
+    .section-title {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin: 40px 0 24px;
+    }
+
+    .section-title h2 {
+      font-size: 1.9rem;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+
+    .section-title a {
+      text-decoration: none;
+      color: #d45a2e;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: opacity 0.2s;
+    }
+
+    .section-title a:hover {
+      opacity: 0.7;
+    }
+
+    .category-grid {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+
+    .category-item {
+      background: #ffffff;
+      border: 1px solid #f0e7e0;
+      padding: 14px 26px;
+      border-radius: 60px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 500;
+      color: #2c2c3a;
+      transition: all 0.15s;
+      cursor: default;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.01);
+    }
+
+    .category-item i {
+      color: #d45a2e;
+      font-size: 1.2rem;
+    }
+
+    .category-item:hover {
+      border-color: #d45a2e;
+      background-color: #fefaf7;
+      box-shadow: 0 10px 18px -10px rgba(212, 90, 46, 0.2);
+    }
+
+    /* --- FOOD CARDS (UI friendly cards) --- */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 28px;
+      margin-bottom: 60px;
+    }
+
+    .food-card {
+      background: white;
+      border-radius: 28px;
+      padding: 0 0 22px;
+      box-shadow: 0 12px 28px -10px rgba(0, 0, 0, 0.06);
+      border: 1px solid #f5ede7;
+      transition: transform 0.25s, box-shadow 0.25s;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .food-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 28px 36px -16px rgba(212, 90, 46, 0.18);
+      border-color: #f5d9cc;
+    }
+
+    .card-img {
+      width: 100%;
+      aspect-ratio: 1/1;
+      background: #fef6f1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      color: #d45a2e;
+      transition: background 0.2s;
+    }
+
+    .food-card:hover .card-img {
+      background: #fef1e9;
+    }
+
+    .card-content {
+      padding: 16px 18px 0;
+    }
+
+    .card-content h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #1e1e2a;
+    }
+
+    .card-desc {
+      font-size: 0.9rem;
+      color: #6b6b7c;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px;
+      margin-top: 8px;
+    }
+
+    .price {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #d45a2e;
+    }
+
+    .price small {
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: #9b9baf;
+      margin-left: 3px;
+    }
+
+    .add-btn {
+      background: #fef1e9;
+      border: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #d45a2e;
+      font-size: 1.2rem;
+      cursor: default;
+      transition: all 0.2s;
+    }
+
+    .food-card:hover .add-btn {
+      background: #d45a2e;
+      color: white;
+      box-shadow: 0 6px 12px -4px rgba(212, 90, 46, 0.4);
+    }
+
+    .rating {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #ffb800;
+    }
+
+    .rating span {
+      color: #6b6b7c;
+      font-weight: 400;
+      margin-left: 3px;
+    }
+
+    /* --- PROMO / DELIVERY BANNER (UI friendly touch) --- */
+    .promo-banner {
+      background: linear-gradient(135deg, #fff4ed 0%, #ffe9dd 100%);
+      border-radius: 48px;
+      padding: 40px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin: 48px 0 60px;
+      border: 1px solid #ffe1d3;
+    }
+
+    .promo-text h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #2c1e16;
+      margin-bottom: 8px;
+    }
+
+    .promo-text p {
+      color: #6e4e3a;
+      font-size: 1.1rem;
+    }
+
+    .promo-code {
+      background: white;
+      border-radius: 60px;
+      padding: 12px 28px;
+      font-weight: 600;
+      font-size: 1.3rem;
+      letter-spacing: 1px;
+      color: #d45a2e;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+      border: 1px dashed #d45a2e;
+    }
+
+    /* --- FOOTER --- */
+    .footer {
+      border-top: 1px solid #f0e7e0;
+      padding: 40px 0 24px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 36px;
+      font-size: 0.95rem;
+      color: #5e5e6f;
+    }
+
+    .footer-logo {
+      font-weight: 700;
+      font-size: 1.7rem;
+      color: #d45a2e;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 60px;
+      flex-wrap: wrap;
+    }
+
+    .footer-col h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #1e1e2a;
+      margin-bottom: 16px;
+    }
+
+    .footer-col a {
+      display: block;
+      text-decoration: none;
+      color: #6b6b7c;
+      margin-bottom: 10px;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover {
+      color: #d45a2e;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 18px;
+      font-size: 1.5rem;
+      color: #b0a8a2;
+      margin-top: 8px;
+    }
+
+    .social-icons i {
+      transition: color 0.2s, transform 0.15s;
+      cursor: default;
+    }
+
+    .social-icons i:hover {
+      color: #d45a2e;
+      transform: scale(1.1);
+    }
+
+    .copyright {
+      text-align: center;
+      padding: 28px 0 16px;
+      font-size: 0.85rem;
+      color: #9f9faf;
+      border-top: 1px solid #f5ede7;
+      margin-top: 20px;
+    }
+
+    /* responsive fine-tuning */
+    @media (max-width: 700px) {
+      .hero-content h1 {
+        font-size: 2.5rem;
+      }
+      .header {
+        justify-content: center;
+        text-align: center;
+      }
+      .nav-links {
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .promo-banner {
+        padding: 30px 24px;
+        text-align: center;
+        justify-content: center;
+      }
+      .footer {
+        flex-direction: column;
+        gap: 24px;
+      }
+      .footer-links {
+        gap: 32px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-cta {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .btn {
+        justify-content: center;
+      }
+      .section-title h2 {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="app-container">
-        <!-- Navigation -->
-        <nav class="navbar" aria-label="Main navigation">
-            <div class="logo-area">
-                <div class="logo-icon" aria-hidden="true">
-                    <em class="fas fa-bolt"></em>
-                </div>
-                <div class="logo-text">LUMINA</div>
-            </div>
-            <div class="nav-links">
-                <a href="#home">Home</a>
-                <a href="#shop">Shop</a>
-                <a href="#collections">Collections</a>
-                <a href="#deals">Deals</a>
-            </div>
-            <div class="nav-actions">
-                <button class="icon-btn" type="button" aria-label="Search products">
-                    <em class="fas fa-search" aria-hidden="true"></em>
-                </button>
-                <button class="icon-btn" type="button" aria-label="Shopping cart, 3 items">
-                    <em class="fas fa-shopping-bag" aria-hidden="true"></em>
-                    <span class="cart-badge" aria-hidden="true">3</span>
-                </button>
-                <div class="avatar" role="button" tabindex="0" aria-label="User account: John Doe">JD</div>
-            </div>
-        </nav>
 
-        <!-- Hero section -->
-        <header class="hero-section" id="home">
-            <div class="hero-content">
-                <div class="hero-badge">
-                    <em class="fas fa-tag" aria-hidden="true"></em> Spring drop 2025
-                </div>
-                <h1>Elevate your <span>everyday</span> style.</h1>
-                <p>Discover curated pieces that blend comfort, quality, and modern design. Free shipping over $75.</p>
-                <div class="hero-cta">
-                    <button class="btn-primary" type="button">
-                        <em class="fas fa-bag-shopping" aria-hidden="true"></em> Shop now
-                    </button>
-                    <button class="btn-outline" type="button">
-                        <em class="fas fa-arrow-right" aria-hidden="true"></em> Explore lookbook
-                    </button>
-                </div>
-            </div>
-            <div class="hero-visual" aria-hidden="true">
-                <em class="fas fa-crown"></em>
-            </div>
-        </header>
-
-        <!-- Categories -->
-        <div class="section-header">
-            <h2>Browse categories</h2>
-            <a href="#categories">View all <em class="fas fa-arrow-right" aria-hidden="true"></em></a>
+  <div class="wrapper">
+    <!-- HEADER -->
+    <header class="header">
+      <div class="logo">
+        <i class="fas fa-utensils"></i> Feastly
+      </div>
+      <nav class="nav-links">
+        <a href="#" class="active">Home</a>
+        <a href="#">Menu</a>
+        <a href="#">Offers</a>
+        <a href="#">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <i class="fas fa-search search-icon" aria-label="Search"></i>
+        <div class="cart-icon">
+          <i class="fas fa-shopping-bag"></i>
+          <span class="cart-badge">2</span>
         </div>
-        <div class="category-row" id="categories">
-            <button class="category-pill active" type="button"><em class="fas fa-star" aria-hidden="true"></em> Featured</button>
-            <button class="category-pill" type="button"><em class="fas fa-tshirt" aria-hidden="true"></em> Apparel</button>
-            <button class="category-pill" type="button"><em class="fas fa-shoe-prints" aria-hidden="true"></em> Footwear</button>
-            <button class="category-pill" type="button"><em class="fas fa-clock" aria-hidden="true"></em> Accessories</button>
-            <button class="category-pill" type="button"><em class="fas fa-laptop" aria-hidden="true"></em> Tech</button>
-            <button class="category-pill" type="button"><em class="fas fa-home" aria-hidden="true"></em> Home</button>
+      </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <i class="fas fa-leaf" style="margin-right: 6px;"></i> fresh & local
         </div>
-
-        <!-- Product grid -->
-        <div class="section-header">
-            <h2>Trending now</h2>
-            <a href="#trending">See all <em class="fas fa-arrow-right" aria-hidden="true"></em></a>
+        <h1>
+          Taste the <span class="hero-highlight">goodness</span> in every bite
+        </h1>
+        <p>
+          Discover delicious meals crafted with love. Free delivery on your first order — because good food should be shared.
+        </p>
+        <div class="hero-cta">
+          <button class="btn btn-primary">
+            <i class="fas fa-bag-shopping"></i> Order now
+          </button>
+          <button class="btn btn-outline">
+            <i class="fas fa-book-open"></i> See menu
+          </button>
         </div>
+      </div>
+      <div class="hero-image">
+        <img 
+          src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Ccircle cx='200' cy='200' r='180' fill='%23fef1e9'/%3E%3Cpath d='M150 150 Q200 80 250 150 Q280 200 250 250 Q200 320 150 250 Q120 200 150 150' fill='%23e86f3a' opacity='0.9'/%3E%3Ccircle cx='180' cy='170' r='12' fill='%23fff3e6'/%3E%3Ccircle cx='230' cy='170' r='12' fill='%23fff3e6'/%3E%3Cpath d='M180 210 Q200 235 220 210' stroke='%23fff3e6' stroke-width='8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"
+          alt="Delicious bowl of food illustration"
+        >
+      </div>
+    </section>
 
-        <div class="product-grid" id="trending">
-            <!-- product 1 -->
-            <article class="product-card">
-                <button class="wishlist-btn" type="button" aria-label="Add Aura Headphones to wishlist">
-                    <em class="far fa-heart" aria-hidden="true"></em>
-                </button>
-                <div class="product-image" aria-hidden="true">
-                    <em class="fas fa-headphones"></em>
-                </div>
-                <div class="rating" aria-label="Rated 4.5 out of 5 stars, 42 reviews">
-                    <em class="fas fa-star" aria-hidden="true"></em><em class="fas fa-star" aria-hidden="true"></em><em class="fas fa-star" aria-hidden="true"></em><em class="fas fa-star" aria-hidden="true"></em><em class="fas fa-star-half-alt" aria-hidden="true"></em>
-                    <span>(42)</span>
-                </div>
-                <h3 class="product-title">Aura Headphones</h3>
-                <div class="product-sub">Wireless · Noise cancel</div>
-                <div class="product-meta">
-                    <div class="product-price">$129 <span>$189</span></div>
-                    <button class="add-to-cart" type="button" aria-label="Add Aura Headphones to cart">
-                        <em class="fas fa-plus" aria-hidden="true"></em>
-                    </button>
-                </div>
-                <div class="free-shipping-tag"><em class="fas fa-truck" aria-hidden="true"></em> Free shipping</div>
-            </article>
+    <!-- CATEGORIES quick picks -->
+    <div class="section-title">
+      <h2>Browse by craving</h2>
+      <a href="#">View all <i class="fas fa-arrow-right" style="font-size: 0.8rem;"></i></a>
+    </div>
+    <div class="category-grid">
+      <div class="category-item"><i class="fas fa-pizza-slice"></i> Pizza</div>
+      <div class="category-item"><i class="fas fa-hamburger"></i> Burgers</div>
+      <div class="category-item"><i class="fas fa-fish"></i> Sushi</div>
+      <div class="category-item"><i class="fas fa-carrot"></i> Vegan</div>
+      <div class="category-item"><i class="fas fa-cocktail"></i> Drinks</div>
+      <div class="category-item"><i class="fas fa-ice-cream"></i> Desserts</div>
+    </div>
 
-            <!-- product 2 -->
-            <article class="product-card">
-                <button class="wishlist-btn" type="button" aria-label="Add Nova X to wishlist">
-                    <em class="far fa-heart" aria-hidden="true"></em>
-                </button>
-                <div class="product-image" aria-hidden="true">
-                    <em class="fas fa-mobile-alt"></em>
-                </div>
-                <div class="rating" aria-label="Rated 4 out of 5 stars, 18 reviews">
-                    <em class="fas fa-star" aria-hidden="true"></em><em class="fas fa-star" aria-hidden="true"></em><em class="fas fa-star" aria-hidden="true"></em><em class="fas fa-star" aria-hidden="true"></em><em class="far fa-star" aria-hidden="true"></em>
-                    <span>(18)</span>
-                </div>
-                <h3 class="product-title">Nova X</h3>
-                <div class="product-sub">5G · 128GB</div>
-                <div class="product-meta">
-                    <div class="product-price">$699 <span>$799</span></div>
-                    <button class="add-to-cart" type="button" aria-label="Add Nova X to cart">
-                        <em class="fas fa-plus" aria-hidden="true"></em>
-                    </button>
-                </div>
-            </article>
-
-            <!-- product 3 -->
-            <article class="product-card">
-                <button class="wishlist-btn" type="button" aria-label="Add Oversized Tee to wishlist">
-                    <em class="far fa-heart" aria-hidden="true"></em>
-                </button>
-                <div class="product-image" aria-hidden="true">
-                    <em class="fas fa-tshirt"></em>
-                </div>
-                <div class="rating" aria-label="Rated 5 out of 5 stars, 97 reviews">
-                    <em class="fas fa-star" aria-hidden="true"></em><em class="fas fa-star" aria-hidden="true"></em><em class="fas fa-star" aria-hidden="true"></em><em class="fas fa-star" aria-hidden="true"></em><em class="fas fa-star" aria-hidden="true"></em>
-                    <span>(97)</span>
-                </div>
-                <h3 class="product-title">Oversized Tee</h3>
-                <div class="product-sub">Organic cotton · Unisex</div>
-                <div class="product-meta">
-                    <div class="product-price">$34 <span>$48</span></div>
-                    <button class="add-to-cart" type="button" aria-label="Add Oversized Tee to cart">
-                        <em class="fas fa-plus" aria-hidden="true"></em>
-                    </button>
-                </div>
-                <div class="free-shipping-tag"><em class="fas fa-truck" aria-hidden="true"></em> Free shipping</div>
-            </article>
-
-            <!-- product 4 -->
-            <article class="product-card">
-                <button class="wishlist-btn" type="button" aria-label="Add Minimal Watch to wishlist">
-                    <em class="far fa-heart" aria-hidden="true"></em>
-                </button>
-                <div class="product-image" aria-hidden="true">
-                    <em class="fas fa-watch"></em>
-                </div>
-                <div class="rating" aria-label="Rated 4 out of 5 stars, 23 reviews">
-                    <em class="fas fa-star" aria-hidden="true"></em><em class="fas fa-star" aria-hidden="true"></em><em class="fas fa-star" aria-hidden="true"></em><em class="fas fa-star" aria-hidden="true"></em><em class="far fa-star" aria-hidden="true"></em>
-                    <span>(23)</span>
-                </div>
-                <h3 class="product-title">Minimal Watch</h3>
-                <div class="product-sub">Sapphire · Leather</div>
-                <div class="product-meta">
-                    <div class="product-price">$199 <span>$259</span></div>
-                    <button class="add-to-cart" type="button" aria-label="Add Minimal Watch to cart">
-                        <em class="fas fa-plus" aria-hidden="true"></em>
-                    </button>
-                </div>
-            </article>
-
-            <!-- product 5 -->
-            <article class="product-card">
-                <button class="wishlist-btn" type="button" aria-label="Add SnapPro 2 to wishlist">
-                    <em class="far fa-heart" aria-hidden="true"></em>
-                </button>
-                <div class="product-image" aria-hidden="true">
-                    <em class="fas fa-camera"></em>
-                </div>
-                <div class="rating" aria-label="Rated 5 out of 5 stars, 56 reviews">
-                    <em class="fas fa-star" aria-hidden="true"></em><em class="fas fa-star" aria-hidden="true"></em><em class="fas fa-star" aria-hidden="true"></em><em class="fas fa-star" aria-hidden="true"></em><em class="fas fa-star" aria-hidden="true"></em>
-                    <span>(56)</span>
-                </div>
-                <h3 class="product-title">SnapPro 2</h3>
-                <div class="product-sub">4K · Mirrorless</div>
-                <div class="product-meta">
-                    <div class="product-price">$849 <span>$999</span></div>
-                    <button class="add-to-cart" type="button" aria-label="Add SnapPro 2 to cart">
-                        <em class="fas fa-plus" aria-hidden="true"></em>
-                    </button>
-                </div>
-            </article>
-
-            <!-- product 6 -->
-            <article class="product-card">
-                <button class="wishlist-btn" type="button" aria-label="Add Lounge Chair to wishlist">
-                    <em class="far fa-heart" aria-hidden="true"></em>
-                </button>
-                <div class="product-image" aria-hidden="true">
-                    <em class="fas fa-chair"></em>
-                </div>
-                <div class="rating" aria-label="Rated 4.5 out of 5 stars, 31 reviews">
-                    <em class="fas fa-star" aria-hidden="true"></em><em class="fas fa-star" aria-hidden="true"></em><em class="fas fa-star" aria-hidden="true"></em><em class="fas fa-star" aria-hidden="true"></em><em class="fas fa-star-half-alt" aria-hidden="true"></em>
-                    <span>(31)</span>
-                </div>
-                <h3 class="product-title">Lounge Chair</h3>
-                <div class="product-sub">Scandi design · Oak</div>
-                <div class="product-meta">
-                    <div class="product-price">$289 <span>$399</span></div>
-                    <button class="add-to-cart" type="button" aria-label="Add Lounge Chair to cart">
-                        <em class="fas fa-plus" aria-hidden="true"></em>
-                    </button>
-                </div>
-                <div class="free-shipping-tag"><em class="fas fa-truck" aria-hidden="true"></em> Free shipping</div>
-            </article>
+    <!-- POPULAR DISHES -->
+    <div class="section-title">
+      <h2>Popular this week</h2>
+      <a href="#">See all <i class="fas fa-arrow-right" style="font-size: 0.8rem;"></i></a>
+    </div>
+    <div class="card-grid">
+      <!-- card 1 -->
+      <div class="food-card">
+        <div class="card-img">
+          <i class="fas fa-pizza-slice"></i>
         </div>
+        <div class="card-content">
+          <h3>Margherita Pizza</h3>
+          <div class="card-desc">
+            <i class="fas fa-star rating" style="color: #ffb800;"></i>
+            <span class="rating">4.8 <span>(120+)</span></span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="price">$12.90 <small></small></div>
+          <div class="add-btn"><i class="fas fa-plus"></i></div>
+        </div>
+      </div>
 
-        <!-- trust / footer bar -->
-        <div class="trust-bar">
-            <div class="trust-item">
-                <em class="fas fa-truck-fast" aria-hidden="true"></em>
-                <div class="trust-text">
-                    <h4>Free delivery</h4>
-                    <p>On orders over $75</p>
-                </div>
-            </div>
-            <div class="trust-item">
-                <em class="fas fa
+      <!-- card 2 -->
+      <div class="food-card">
+        <div class="card-img">
+          <i class="fas fa-hamburger"></i>
+        </div>
+        <div class="card-content">
+          <h3>Double Cheeseburger</h3>
+          <div class="card-desc">
+            <i class="fas fa-star rating" style="color: #ffb800;"></i>
+            <span class="rating">4.9 <span>(98+)</span></span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="price">$15.50</div>
+          <div class="add-btn"><i class="fas fa-plus"></i></div>
+        </div>
+      </div>
+
+      <!-- card 3 -->
+      <div class="food-card">
+        <div class="card-img">
+          <i class="fas fa-fish"></i>
+        </div>
+        <div class="card-content">
+          <h3>Salmon Sushi Set</h3>
+          <div class="card-desc">
+            <i class="fas fa-star rating" style="color: #ffb800;"></i>
+            <span class="rating">4.7 <span>(76+)</span></span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="price">$18.20</div>
+          <div class="add-btn"><i class="fas fa-plus"></i></div>
+        </div>
+      </div>
+
+      <!-- card 4 -->
+      <div class="food-card">
+        <div class="card-img">
+          <i class="fas fa-ice-cream"></i>
+        </div>
+        <div class="card-content">
+          <h3>Berry Sundae</h3>
+          <div class="card-desc">
+            <i class="fas fa-star rating" style="color: #ffb800;"></i>
+            <span class="rating">4.9 <span>(210+)</span></span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="price">$8.40</div>
+          <div class="add-btn"><i class="fas fa-plus"></i></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROMO BANNER (UI friendly callout) -->
+    <div class="promo-banner">
+      <div class="promo-text">
+        <h2>Free delivery on your first order 🎉</h2>
+        <p>Use code <strong>FEASTLY10</strong> at checkout — fresh food, zero fees.</p>
+      </div>
+      <div class="promo-code">
+        FEASTLY10
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div style="flex: 1 1 240px;">
+        <div class="footer-logo">
+          <i class="fas fa-utensils"></i> Feastly
+        </div>
+        <p style="max-width: 260px; color: #6b6b7c; margin-bottom: 18px;">
+          Made with <i class="fas fa-heart" style="color: #d45a2e;"></i> for food lovers. Fresh ingredients, friendly service.
+        </p>
+        <div class="social-icons">
+          <i class="fab fa-instagram"></i>
+          <i class="fab fa-facebook"></i>
+          <i class="fab fa-x-twitter"></i>
+          <i class="fab fa-tiktok"></i>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <a href="#">Menu</a>
+          <a href="#">Offers</a>
+          <a href="#">Gift cards</a>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <a href="#">Contact</a>
+          <a href="#">FAQs</a>
+          <a href="#">Delivery</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="#">Terms</a>
+          <a href="#">Privacy</a>
+          <a href="#">Cookies</a>
+        </div>
+      </div>
+    </footer>
+    <div class="copyright">
+      © 2025 Feastly — good food, good mood.
+    </div>
+  </div>
+  <!-- wrapper end -->
+
+</body>
+</html>
